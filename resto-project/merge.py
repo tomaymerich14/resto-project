@@ -4,28 +4,19 @@ import numpy as np
 def merge():
 
     events = pd.read_csv('../exo_data/events.csv')
-    hist_meteo = pd.read_csv('../exo_data/Historical-Services.csv')
-    psg = pd.read_csv('../exo_data/PSG-Matches.csv')
-    psg_ldc =  pd.read_csv('../exo_data/PSG-Matches-CL.csv')
+    weather_df = pd.read_csv('../exo_data/weather_df.csv')
+    football_df = pd.read_csv('../exo_data/football_df.csv')
     db = pd.read_csv('../raw_data/df_dBourse.csv')
     d16 =pd.read_csv('../raw_data/df_DXVI.csv')
-    vac = pd.read_csv('../exo_data/vacances_paris.csv')
-
-    # --------------- TO OPERATE BEFORE --------------------
-
-    # Drop columns All Matchs PSG
-    psg = psg.drop(columns=['Location','Home Team', 'Away Team'])
-    # Drop columns Vacs
-    vac = vac.drop(columns=['Unnamed: 0'])
+    vacations_df = pd.read_csv('../exo_data/vacations_df.csv')
 
     #-------------------------------------------------------
 
     # Merge d2
-    df_d2 = db.merge(hist_meteo, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    df_d2 = db.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg_ldc, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vac, how='left', left_on=["date"], right_on=["date"])
+    .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(vacations_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     # Pb avec météo, on drop duplicates
     df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
@@ -38,11 +29,10 @@ def merge():
     # OK pour d2
 
     # Merge d16 ----------------------------------------------
-    df_d16 = d16.merge(hist_meteo, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    df_d16 = d16.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg_ldc, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vac, how='left', left_on=["date"], right_on=["date"])
+    .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(vacations_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
 
