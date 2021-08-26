@@ -78,8 +78,10 @@ def excel_to_csv(filename):
     #----------------------------------
 
     #-------------------rounding------
+    df['CA TTC'] = round(df['CA TTC'], 2)
     df['CA HT']=round(df['CA HT'],2)
     df['TVA']=round(df['TVA'],2)
+
     #----------------------------------
 
     #-------------Setting Correct unique 'Timestamp' index
@@ -97,16 +99,79 @@ def excel_to_csv(filename):
     if filename == 'CA_DarocoBourse':
         df=df.sort_values(by='date')
         df=df.iloc[1: , :]
-    #----------------------------------------#----------------------------------------
-    #----------------------------------------#----------------------------------------
+
+
+        #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES DE MIDI DE BOURSE OUTLIERS-------------- #----------------------------------------
+        midi_df_dBourse = df[ df['service'] == 'midi' ]
+        midi_df_dB_index_CA_petit=midi_df_dBourse[ midi_df_dBourse['CA_TTC'] < 500 ].index
+        df=df.drop(midi_df_dB_index_CA_petit)
+
+        midi_df_dB_index_CA_grand=midi_df_dBourse[ midi_df_dBourse['CA_TTC'] > 8500 ].index
+        df=df.drop(midi_df_dB_index_CA_grand)
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
+
+        #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES DE SOIR DE BOURSE OUTLIERS-------------- #----------------------------------------
+
+        soir_df_dBourse = df[ df['service'] == 'soir' ]
+
+        soir_df_dB_index_CA_petit=soir_df_dBourse[ soir_df_dBourse['CA_TTC'] < 650 ].index
+        df=df.drop(soir_df_dB_index_CA_petit)
+
+
+        soir_df_dB_index_CA_grand=soir_df_dBourse[ soir_df_dBourse['CA_TTC'] > 17000 ].index
+        df=df.drop(soir_df_dB_index_CA_grand)
+
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
+
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
+
+
+    if filename == 'CA_DarocoXVI':
+
+
+        #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES DE MIDI DE XVI OUTLIERS-------------- #----------------------------------------
+        midi_df_dXVI = df[df['service'] == 'midi']
+
+        midi_df_dXVI_index_CA_petit=midi_df_dXVI[ midi_df_dXVI['CA_TTC'] < 600 ].index
+        df = df.drop(midi_df_dXVI_index_CA_petit)
+
+        midi_df_dXVI_index_CA_grand=midi_df_dXVI[ midi_df_dXVI['CA_TTC'] > 7000 ].index
+        df = df.drop(midi_df_dXVI_index_CA_grand)
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
+
+        #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES DE SOIR DE XVI OUTLIERS-------------- #----------------------------------------
+
+        soir_df_dXVI = df[df['service'] == 'soir']
+
+        soir_df_dXVI_index_CA_petit=soir_df_dXVI[ soir_df_dXVI['CA_TTC'] < 700 ].index
+        df = df.drop(soir_df_dXVI_index_CA_petit)
+
+
+        soir_df_dXVI_index_CA_grand=soir_df_dXVI[ soir_df_dXVI['CA_TTC'] > 14000 ].index
+        df = df.drop(soir_df_dXVI_index_CA_grand)
+
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
+
 
 
 
     #-------------------------Create CSV in RAW DATA------------------------------
     if filename == 'CA_DarocoBourse':
         df.to_csv(r'../raw_data/df_dBourse.csv',index=False)
+
+
     if filename == 'CA_DarocoXVI':
         df.to_csv(r'../raw_data/df_DXVI.csv', index=False)
+
 
 
     return None
@@ -119,11 +184,13 @@ def excel_to_csv(filename):
 #Console TEST
 if __name__ == '__main__':
 
-    #path = '/Users/guillaume/code/tomaymerich14/resto-project/raw_data/CA_DarocoBourse.xlsx'
-
-    #TEST
 
     excel_to_csv('CA_DarocoBourse')
     excel_to_csv('CA_DarocoXVI')
-    #df.to_csv(r'/Users/guillaume/Desktop/Projet_Daroco/df_dBourse.csv',index=False)
-    #df.to_csv(r'/Users/guillaume/Desktop/Projet_Daroco/df_DXVI.csv',index=False)
+
+
+
+
+    #TEST
+    #df.to_csv(r'/Users/guillaume/Desktop/Projet_Daroco/df_dBourse_test.csv',index=False)
+    #df.to_csv(r'/Users/guillaume/Desktop/Projet_Daroco/df_DXVI_test.csv',index=False)
