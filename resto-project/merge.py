@@ -20,6 +20,7 @@ def merge():
 
     # Pb avec météo, on drop duplicates
     df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
+    df_d2.drop(columns = ['CA_HT','TVA'], inplace= True)
 
     # Reset index
     df_d2 = df_d2.reset_index(drop=True)
@@ -35,6 +36,7 @@ def merge():
     .merge(vacations_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
+    df_d16.drop(columns=['CA_HT', 'TVA'], inplace=True)
 
     df_d16 = df_d16.reset_index(drop=True)
 
