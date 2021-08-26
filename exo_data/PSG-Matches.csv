@@ -1,0 +1,361 @@
+date,Location,Home Team,Away Team,service,Match Happening
+2017-12-09,"Celtic Park, Glasgow",Celtic,Paris Saint-Germain,midi,0
+2017-12-09,"Celtic Park, Glasgow",Celtic,Paris Saint-Germain,diner,1
+2017-09-27,"Parc des Princes, Paris",Paris Saint-Germain,Bayern Munich,midi,0
+2017-09-27,"Parc des Princes, Paris",Paris Saint-Germain,Bayern Munich,diner,1
+2017-10-18,"Constant Vanden Stock Stadium, Anderlecht",Anderlecht,Paris Saint-Germain,midi,0
+2017-10-18,"Constant Vanden Stock Stadium, Anderlecht",Anderlecht,Paris Saint-Germain,diner,1
+2017-10-31,"Parc des Princes, Paris",Paris Saint-Germain,Anderlecht,midi,0
+2017-10-31,"Parc des Princes, Paris",Paris Saint-Germain,Anderlecht,diner,1
+2017-11-22,"Parc des Princes, Paris",Paris Saint-Germain,Celtic,midi,0
+2017-11-22,"Parc des Princes, Paris",Paris Saint-Germain,Celtic,diner,1
+2017-05-12,"Allianz Arena, Munich",Bayern Munich,Paris Saint-Germain,midi,0
+2017-05-12,"Allianz Arena, Munich",Bayern Munich,Paris Saint-Germain,diner,1
+2018-02-14,"Santiago Bernabéu, Madrid",Real Madrid,Paris Saint-Germain,midi,0
+2018-02-14,"Santiago Bernabéu, Madrid",Real Madrid,Paris Saint-Germain,diner,1
+2018-06-03,"Parc des Princes, Paris",Paris Saint-Germain,Real Madrid,midi,0
+2018-06-03,"Parc des Princes, Paris",Paris Saint-Germain,Real Madrid,diner,1
+2018-09-18,Anfield,Liverpool,Paris,midi,0
+2018-09-18,Anfield,Liverpool,Paris,diner,1
+2018-03-10,Parc des Princes,Paris,Crvena zvezda,midi,0
+2018-03-10,Parc des Princes,Paris,Crvena zvezda,diner,1
+2018-10-24,Parc des Princes,Paris,Napoli,midi,0
+2018-10-24,Parc des Princes,Paris,Napoli,diner,1
+2018-06-11,Stadio San Paolo,Napoli,Paris,midi,0
+2018-06-11,Stadio San Paolo,Napoli,Paris,diner,1
+2018-11-28,Parc des Princes,Paris,Liverpool,midi,0
+2018-11-28,Parc des Princes,Paris,Liverpool,diner,1
+2018-11-12,Stadion Rajko Mitic,Crvena zvezda,Paris,midi,0
+2018-11-12,Stadion Rajko Mitic,Crvena zvezda,Paris,diner,1
+2019-12-02,Old Trafford,Man. United,Paris,midi,0
+2019-12-02,Old Trafford,Man. United,Paris,diner,1
+2019-06-03,Parc des Princes,Paris,Man. United,midi,0
+2019-06-03,Parc des Princes,Paris,Man. United,diner,1
+2019-09-18,Parc des Princes,Paris,Real Madrid,midi,0
+2019-09-18,Parc des Princes,Paris,Real Madrid,diner,1
+2019-01-10,Ali Sami Yen Spor Kompleksi,Galatasaray,Paris,midi,0
+2019-01-10,Ali Sami Yen Spor Kompleksi,Galatasaray,Paris,diner,1
+2019-10-22,Jan Breydelstadion,Club Brugge,Paris,midi,0
+2019-10-22,Jan Breydelstadion,Club Brugge,Paris,diner,1
+2019-06-11,Parc des Princes,Paris,Club Brugge,midi,0
+2019-06-11,Parc des Princes,Paris,Club Brugge,diner,1
+2019-11-26,Estadio Santiago Bernabéu,Real Madrid,Paris,midi,0
+2019-11-26,Estadio Santiago Bernabéu,Real Madrid,Paris,diner,1
+2019-11-12,Parc des Princes,Paris,Galatasaray,midi,0
+2019-11-12,Parc des Princes,Paris,Galatasaray,diner,1
+2020-02-18,BVB Stadion Dortmund,Dortmund,Paris,midi,0
+2020-02-18,BVB Stadion Dortmund,Dortmund,Paris,diner,1
+2020-11-03,Parc des Princes,Paris,Dortmund,midi,0
+2020-11-03,Parc des Princes,Paris,Dortmund,diner,1
+2020-12-08,Estádio do Sport Lisboa e Benfica,Atalanta,Paris,midi,0
+2020-12-08,Estádio do Sport Lisboa e Benfica,Atalanta,Paris,diner,1
+2020-08-18,Estádio do Sport Lisboa e Benfica,Leipzig,Paris,midi,0
+2020-08-18,Estádio do Sport Lisboa e Benfica,Leipzig,Paris,diner,1
+2020-08-23,Estádio do Sport Lisboa e Benfica,Paris,Bayern,midi,0
+2020-08-23,Estádio do Sport Lisboa e Benfica,Paris,Bayern,diner,1
+2020-10-20,Parc des Princes,Paris,Man. United,midi,0
+2020-10-20,Parc des Princes,Paris,Man. United,diner,1
+2020-10-28,Istanbul Basaksehir Fatih Terim Stadyumu,Istanbul Basaksehir,Paris,midi,0
+2020-10-28,Istanbul Basaksehir Fatih Terim Stadyumu,Istanbul Basaksehir,Paris,diner,1
+2020-04-11,RB Arena,Leipzig,Paris,midi,0
+2020-04-11,RB Arena,Leipzig,Paris,diner,1
+2020-11-24,Parc des Princes,Paris,Leipzig,midi,0
+2020-11-24,Parc des Princes,Paris,Leipzig,diner,1
+2020-02-12,Old Trafford,Man. United,Paris,midi,0
+2020-02-12,Old Trafford,Man. United,Paris,diner,1
+2020-09-12,Parc des Princes,Paris,Istanbul Basaksehir,midi,0
+2020-09-12,Parc des Princes,Paris,Istanbul Basaksehir,diner,1
+2021-02-16,Camp Nou,Barcelona,Paris,midi,0
+2021-02-16,Camp Nou,Barcelona,Paris,diner,1
+2021-10-03,Parc des Princes,Paris,Barcelona,midi,0
+2021-10-03,Parc des Princes,Paris,Barcelona,diner,1
+2021-07-04,Fußball Arena München,Bayern,Paris,midi,0
+2021-07-04,Fußball Arena München,Bayern,Paris,diner,1
+2021-04-13,Parc des Princes,Paris,Bayern,midi,0
+2021-04-13,Parc des Princes,Paris,Bayern,diner,1
+2021-04-28,Parc des Princes,Paris,Man. City,midi,0
+2021-04-28,Parc des Princes,Paris,Man. City,diner,1
+2021-04-05,City of Manchester Stadium,Man. City,Paris,midi,0
+2021-04-05,City of Manchester Stadium,Man. City,Paris,diner,1
+2018-12-08,Parc des Princes,Paris Saint-Germain,SM Caen,midi,0
+2018-12-08,Parc des Princes,Paris Saint-Germain,SM Caen,diner,1
+2018-08-18,Stade de Roudourou,EA Guingamp,Paris Saint-Germain,midi,0
+2018-08-18,Stade de Roudourou,EA Guingamp,Paris Saint-Germain,diner,1
+2018-08-25,Parc des Princes,Paris Saint-Germain,Angers SCO,midi,0
+2018-08-25,Parc des Princes,Paris Saint-Germain,Angers SCO,diner,1
+2018-01-09,Stade des Costières,Nîmes Olympique,Paris Saint-Germain,midi,0
+2018-01-09,Stade des Costières,Nîmes Olympique,Paris Saint-Germain,diner,1
+2018-09-14,Parc des Princes,Paris Saint-Germain,AS Saint-Etienne,midi,0
+2018-09-14,Parc des Princes,Paris Saint-Germain,AS Saint-Etienne,diner,1
+2018-09-23,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,midi,0
+2018-09-23,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,diner,1
+2018-09-26,Parc des Princes,Paris Saint-Germain,Stade de Reims,midi,0
+2018-09-26,Parc des Princes,Paris Saint-Germain,Stade de Reims,diner,1
+2018-09-29,Allianz Riviera,OGC Nice,Paris Saint-Germain,midi,0
+2018-09-29,Allianz Riviera,OGC Nice,Paris Saint-Germain,diner,1
+2018-07-10,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,midi,0
+2018-07-10,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,diner,1
+2018-10-20,Parc des Princes,Paris Saint-Germain,Amiens SC,midi,0
+2018-10-20,Parc des Princes,Paris Saint-Germain,Amiens SC,diner,1
+2018-10-28,Stade Vélodrome,Olympique de Marseille,Paris Saint-Germain,midi,0
+2018-10-28,Stade Vélodrome,Olympique de Marseille,Paris Saint-Germain,diner,1
+2018-02-11,Parc des Princes,Paris Saint-Germain,LOSC,midi,0
+2018-02-11,Parc des Princes,Paris Saint-Germain,LOSC,diner,1
+2018-11-11,Stade Louis II,AS Monaco,Paris Saint-Germain,midi,0
+2018-11-11,Stade Louis II,AS Monaco,Paris Saint-Germain,diner,1
+2018-11-24,Parc des Princes,Paris Saint-Germain,Toulouse FC,midi,0
+2018-11-24,Parc des Princes,Paris Saint-Germain,Toulouse FC,diner,1
+2018-02-12,Nouveau Stade de Bordeaux,Girondins de Bordeaux,Paris Saint-Germain,midi,0
+2018-02-12,Nouveau Stade de Bordeaux,Girondins de Bordeaux,Paris Saint-Germain,diner,1
+2018-05-12,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,midi,0
+2018-05-12,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,diner,1
+2018-12-22,Parc des Princes,Paris Saint-Germain,FC Nantes,midi,0
+2018-12-22,Parc des Princes,Paris Saint-Germain,FC Nantes,diner,1
+2019-12-01,Stade de la Licorne,Amiens SC,Paris Saint-Germain,midi,0
+2019-12-01,Stade de la Licorne,Amiens SC,Paris Saint-Germain,diner,1
+2019-01-19,Parc des Princes,Paris Saint-Germain,EA Guingamp,midi,0
+2019-01-19,Parc des Princes,Paris Saint-Germain,EA Guingamp,diner,1
+2019-01-27,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,midi,0
+2019-01-27,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,diner,1
+2019-03-02,Parc Olympique Lyonnais,Olympique Lyonnais,Paris Saint-Germain,midi,0
+2019-03-02,Parc Olympique Lyonnais,Olympique Lyonnais,Paris Saint-Germain,diner,1
+2019-09-02,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,midi,0
+2019-09-02,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,diner,1
+2019-02-17,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,midi,0
+2019-02-17,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,diner,1
+2019-02-20,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,midi,0
+2019-02-20,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,diner,1
+2019-02-23,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,midi,0
+2019-02-23,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,diner,1
+2019-02-03,Stade Michel d'Ornano,SM Caen,Paris Saint-Germain,midi,0
+2019-02-03,Stade Michel d'Ornano,SM Caen,Paris Saint-Germain,diner,1
+2019-12-03,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,midi,0
+2019-12-03,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,diner,1
+2019-03-17,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,midi,0
+2019-03-17,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,diner,1
+2019-03-31,Stadium Municipal,Toulouse FC,Paris Saint-Germain,midi,0
+2019-03-31,Stadium Municipal,Toulouse FC,Paris Saint-Germain,diner,1
+2019-07-04,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,midi,0
+2019-07-04,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,diner,1
+2019-04-14,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,midi,0
+2019-04-14,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,diner,1
+2019-04-17,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,midi,0
+2019-04-17,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,diner,1
+2019-04-21,Parc des Princes,Paris Saint-Germain,AS Monaco,midi,0
+2019-04-21,Parc des Princes,Paris Saint-Germain,AS Monaco,diner,1
+2019-04-30,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,midi,0
+2019-04-30,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,diner,1
+2019-04-05,Parc des Princes,Paris Saint-Germain,OGC Nice,midi,0
+2019-04-05,Parc des Princes,Paris Saint-Germain,OGC Nice,diner,1
+2019-11-05,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,midi,0
+2019-11-05,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,diner,1
+2019-05-18,Parc des Princes,Paris Saint-Germain,Dijon FCO,midi,0
+2019-05-18,Parc des Princes,Paris Saint-Germain,Dijon FCO,diner,1
+2019-05-24,Stade Auguste-Delaune,Stade de Reims,Paris Saint-Germain,midi,0
+2019-05-24,Stade Auguste-Delaune,Stade de Reims,Paris Saint-Germain,diner,1
+2019-11-08,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,midi,0
+2019-11-08,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,diner,1
+2019-08-18,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,midi,0
+2019-08-18,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,diner,1
+2019-08-25,Parc des Princes,Paris Saint-Germain,Toulouse FC,midi,0
+2019-08-25,Parc des Princes,Paris Saint-Germain,Toulouse FC,diner,1
+2019-08-30,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,midi,0
+2019-08-30,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,diner,1
+2019-09-14,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,midi,0
+2019-09-14,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,diner,1
+2019-09-22,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,midi,0
+2019-09-22,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,diner,1
+2019-09-25,Parc des Princes,Paris Saint-Germain,Stade de Reims,midi,0
+2019-09-25,Parc des Princes,Paris Saint-Germain,Stade de Reims,diner,1
+2019-09-28,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,midi,0
+2019-09-28,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,diner,1
+2019-05-10,Parc des Princes,Paris Saint-Germain,Angers SCO,midi,0
+2019-05-10,Parc des Princes,Paris Saint-Germain,Angers SCO,diner,1
+2019-10-18,Allianz Riviera,OGC Nice,Paris Saint-Germain,midi,0
+2019-10-18,Allianz Riviera,OGC Nice,Paris Saint-Germain,diner,1
+2019-10-27,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,midi,0
+2019-10-27,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,diner,1
+2019-01-11,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,midi,0
+2019-01-11,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,diner,1
+2019-09-11,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,midi,0
+2019-09-11,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,diner,1
+2019-11-22,Parc des Princes,Paris Saint-Germain,LOSC,midi,0
+2019-11-22,Parc des Princes,Paris Saint-Germain,LOSC,diner,1
+2019-04-12,Parc des Princes,Paris Saint-Germain,FC Nantes,midi,0
+2019-04-12,Parc des Princes,Paris Saint-Germain,FC Nantes,diner,1
+2019-07-12,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,midi,0
+2019-07-12,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,diner,1
+2019-12-15,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,midi,0
+2019-12-15,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,diner,1
+2019-12-21,Parc des Princes,Paris Saint-Germain,Amiens SC,midi,0
+2019-12-21,Parc des Princes,Paris Saint-Germain,Amiens SC,diner,1
+2020-12-01,Parc des Princes,Paris Saint-Germain,AS Monaco,midi,0
+2020-12-01,Parc des Princes,Paris Saint-Germain,AS Monaco,diner,1
+2020-01-15,Stade Louis II,AS Monaco,Paris Saint-Germain,midi,0
+2020-01-15,Stade Louis II,AS Monaco,Paris Saint-Germain,diner,1
+2020-01-26,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,midi,0
+2020-01-26,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,diner,1
+2020-01-02,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,midi,0
+2020-01-02,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,diner,1
+2020-04-02,La Beaujoire-Louis,FC Nantes,Paris Saint-Germain,midi,0
+2020-04-02,La Beaujoire-Louis,FC Nantes,Paris Saint-Germain,diner,1
+2020-09-02,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,midi,0
+2020-09-02,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,diner,1
+2020-02-15,Stade de la Licorne,Amiens SC,Paris Saint-Germain,midi,0
+2020-02-15,Stade de la Licorne,Amiens SC,Paris Saint-Germain,diner,1
+2020-02-22,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,midi,0
+2020-02-22,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,diner,1
+2020-02-29,Parc des Princes,Paris Saint-Germain,Dijon FCO,midi,0
+2020-02-29,Parc des Princes,Paris Saint-Germain,Dijon FCO,diner,1
+2020-10-09,Stade Bollaert-Delelis,RC Lens,Paris Saint-Germain,midi,0
+2020-10-09,Stade Bollaert-Delelis,RC Lens,Paris Saint-Germain,diner,1
+2020-09-13,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,midi,0
+2020-09-13,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,diner,1
+2020-09-16,Parc des Princes,Paris Saint-Germain,FC Metz,midi,0
+2020-09-16,Parc des Princes,Paris Saint-Germain,FC Metz,diner,1
+2020-09-20,Allianz Riviera,OGC Nice,Paris Saint-Germain,midi,0
+2020-09-20,Allianz Riviera,OGC Nice,Paris Saint-Germain,diner,1
+2020-09-27,Stade Auguste Delaune,Stade de Reims,Paris Saint-Germain,midi,0
+2020-09-27,Stade Auguste Delaune,Stade de Reims,Paris Saint-Germain,diner,1
+2020-02-10,Parc des Princes,Paris Saint-Germain,Angers SCO,midi,0
+2020-02-10,Parc des Princes,Paris Saint-Germain,Angers SCO,diner,1
+2020-10-16,Stade des Costières,Nîmes Olympique,Paris Saint-Germain,midi,0
+2020-10-16,Stade des Costières,Nîmes Olympique,Paris Saint-Germain,diner,1
+2020-10-24,Parc des Princes,Paris Saint-Germain,Dijon FCO,midi,0
+2020-10-24,Parc des Princes,Paris Saint-Germain,Dijon FCO,diner,1
+2020-10-31,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,midi,0
+2020-10-31,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,diner,1
+2020-07-11,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,midi,0
+2020-07-11,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,diner,1
+2020-11-20,Stade Louis II,AS Monaco,Paris Saint-Germain,midi,0
+2020-11-20,Stade Louis II,AS Monaco,Paris Saint-Germain,diner,1
+2020-11-28,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,midi,0
+2020-11-28,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,diner,1
+2020-05-12,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,midi,0
+2020-05-12,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,diner,1
+2020-12-13,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,midi,0
+2020-12-13,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,diner,1
+2020-12-16,Parc des Princes,Paris Saint-Germain,FC Lorient,midi,0
+2020-12-16,Parc des Princes,Paris Saint-Germain,FC Lorient,diner,1
+2020-12-20,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,midi,0
+2020-12-20,Stade Pierre-Mauroy,LOSC,Paris Saint-Germain,diner,1
+2020-12-23,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,midi,0
+2020-12-23,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,diner,1
+2021-06-01,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,midi,0
+2021-06-01,Stade Geoffroy-Guichard,AS Saint-Etienne,Paris Saint-Germain,diner,1
+2021-09-01,Parc des Princes,Paris Saint-Germain,Stade Brestois 29,midi,0
+2021-09-01,Parc des Princes,Paris Saint-Germain,Stade Brestois 29,diner,1
+2021-01-16,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,midi,0
+2021-01-16,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,diner,1
+2021-01-22,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,midi,0
+2021-01-22,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,diner,1
+2021-01-31,Stade du Moustoir,FC Lorient,Paris Saint-Germain,midi,0
+2021-01-31,Stade du Moustoir,FC Lorient,Paris Saint-Germain,diner,1
+2021-03-02,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,midi,0
+2021-03-02,Parc des Princes,Paris Saint-Germain,Nîmes Olympique,diner,1
+2021-07-02,Orange Vélodrome,Olympique de Marseille,Paris Saint-Germain,midi,0
+2021-07-02,Orange Vélodrome,Olympique de Marseille,Paris Saint-Germain,diner,1
+2021-02-13,Parc des Princes,Paris Saint-Germain,OGC Nice,midi,0
+2021-02-13,Parc des Princes,Paris Saint-Germain,OGC Nice,diner,1
+2021-02-21,Parc des Princes,Paris Saint-Germain,AS Monaco,midi,0
+2021-02-21,Parc des Princes,Paris Saint-Germain,AS Monaco,diner,1
+2021-02-27,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,midi,0
+2021-02-27,Stade Gaston Gérard,Dijon FCO,Paris Saint-Germain,diner,1
+2021-03-03,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,midi,0
+2021-03-03,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,diner,1
+2021-03-14,Parc des Princes,Paris Saint-Germain,FC Nantes,midi,0
+2021-03-14,Parc des Princes,Paris Saint-Germain,FC Nantes,diner,1
+2021-03-21,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,midi,0
+2021-03-21,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,diner,1
+2021-03-04,Parc des Princes,Paris Saint-Germain,LOSC,midi,0
+2021-03-04,Parc des Princes,Paris Saint-Germain,LOSC,diner,1
+2021-10-04,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,midi,0
+2021-10-04,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,diner,1
+2021-04-18,Parc des Princes,Paris Saint-Germain,AS Saint-Etienne,midi,0
+2021-04-18,Parc des Princes,Paris Saint-Germain,AS Saint-Etienne,diner,1
+2021-04-24,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,midi,0
+2021-04-24,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,diner,1
+2021-01-05,Parc des Princes,Paris Saint-Germain,RC Lens,midi,0
+2021-01-05,Parc des Princes,Paris Saint-Germain,RC Lens,diner,1
+2021-09-05,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,midi,0
+2021-09-05,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,diner,1
+2021-05-16,Parc des Princes,Paris Saint-Germain,Stade de Reims,midi,0
+2021-05-16,Parc des Princes,Paris Saint-Germain,Stade de Reims,diner,1
+2021-05-23,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,midi,0
+2021-05-23,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,diner,1
+2021-07-08,Stade de l'Aube,ESTAC Troyes,Paris Saint-Germain,midi,0
+2021-07-08,Stade de l'Aube,ESTAC Troyes,Paris Saint-Germain,diner,1
+2021-08-14,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,midi,0
+2021-08-14,Parc des Princes,Paris Saint-Germain,RC Strasbourg Alsace,diner,1
+2021-08-20,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,midi,0
+2021-08-20,Stade Francis-Le Blé,Stade Brestois 29,Paris Saint-Germain,diner,1
+2021-08-29,Stade Auguste Delaune,Stade de Reims,Paris Saint-Germain,midi,0
+2021-08-29,Stade Auguste Delaune,Stade de Reims,Paris Saint-Germain,diner,1
+2021-12-09,Parc des Princes,Paris Saint-Germain,Clermont Foot 63,midi,0
+2021-12-09,Parc des Princes,Paris Saint-Germain,Clermont Foot 63,diner,1
+2021-09-19,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,midi,0
+2021-09-19,Parc des Princes,Paris Saint-Germain,Olympique Lyonnais,diner,1
+2021-09-22,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,midi,0
+2021-09-22,Stade Saint-Symphorien,FC Metz,Paris Saint-Germain,diner,1
+2021-09-26,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,midi,0
+2021-09-26,Parc des Princes,Paris Saint-Germain,Montpellier Hérault SC,diner,1
+2021-03-10,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,midi,0
+2021-03-10,Roazhon Park,Stade Rennais FC,Paris Saint-Germain,diner,1
+2021-10-17,Parc des Princes,Paris Saint-Germain,Angers SCO,midi,0
+2021-10-17,Parc des Princes,Paris Saint-Germain,Angers SCO,diner,1
+2021-10-24,Orange Vélodrome,Olympique de Marseille,Paris Saint-Germain,midi,0
+2021-10-24,Orange Vélodrome,Olympique de Marseille,Paris Saint-Germain,diner,1
+2021-10-31,Parc des Princes,Paris Saint-Germain,LOSC Lille,midi,0
+2021-10-31,Parc des Princes,Paris Saint-Germain,LOSC Lille,diner,1
+2021-07-11,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,midi,0
+2021-07-11,Matmut Atlantique,Girondins de Bordeaux,Paris Saint-Germain,diner,1
+2021-11-21,Parc des Princes,Paris Saint-Germain,FC Nantes,midi,0
+2021-11-21,Parc des Princes,Paris Saint-Germain,FC Nantes,diner,1
+2021-11-28,Stade Geoffroy-Guichard,AS Saint-Étienne,Paris Saint-Germain,midi,0
+2021-11-28,Stade Geoffroy-Guichard,AS Saint-Étienne,Paris Saint-Germain,diner,1
+2021-01-12,Parc des Princes,Paris Saint-Germain,OGC Nice,midi,0
+2021-01-12,Parc des Princes,Paris Saint-Germain,OGC Nice,diner,1
+2021-05-12,Stade Bollaert-Delelis,RC Lens,Paris Saint-Germain,midi,0
+2021-05-12,Stade Bollaert-Delelis,RC Lens,Paris Saint-Germain,diner,1
+2021-12-12,Parc des Princes,Paris Saint-Germain,AS Monaco,midi,0
+2021-12-12,Parc des Princes,Paris Saint-Germain,AS Monaco,diner,1
+2021-12-22,Stade du Moustoir,FC Lorient,Paris Saint-Germain,midi,0
+2021-12-22,Stade du Moustoir,FC Lorient,Paris Saint-Germain,diner,1
+2022-09-01,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,midi,0
+2022-09-01,Groupama Stadium,Olympique Lyonnais,Paris Saint-Germain,diner,1
+2022-01-16,Parc des Princes,Paris Saint-Germain,Stade Brestois 29,midi,0
+2022-01-16,Parc des Princes,Paris Saint-Germain,Stade Brestois 29,diner,1
+2022-01-23,Parc des Princes,Paris Saint-Germain,Stade de Reims,midi,0
+2022-01-23,Parc des Princes,Paris Saint-Germain,Stade de Reims,diner,1
+2022-06-02,Stade Pierre-Mauroy,LOSC Lille,Paris Saint-Germain,midi,0
+2022-06-02,Stade Pierre-Mauroy,LOSC Lille,Paris Saint-Germain,diner,1
+2022-02-13,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,midi,0
+2022-02-13,Parc des Princes,Paris Saint-Germain,Stade Rennais FC,diner,1
+2022-02-20,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,midi,0
+2022-02-20,Stade de la Beaujoire,FC Nantes,Paris Saint-Germain,diner,1
+2022-02-27,Parc des Princes,Paris Saint-Germain,AS Saint-Étienne,midi,0
+2022-02-27,Parc des Princes,Paris Saint-Germain,AS Saint-Étienne,diner,1
+2022-06-03,Allianz Riviera,OGC Nice,Paris Saint-Germain,midi,0
+2022-06-03,Allianz Riviera,OGC Nice,Paris Saint-Germain,diner,1
+2022-03-13,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,midi,0
+2022-03-13,Parc des Princes,Paris Saint-Germain,Girondins de Bordeaux,diner,1
+2022-03-20,Stade Louis II,AS Monaco,Paris Saint-Germain,midi,0
+2022-03-20,Stade Louis II,AS Monaco,Paris Saint-Germain,diner,1
+2022-03-04,Parc des Princes,Paris Saint-Germain,FC Lorient,midi,0
+2022-03-04,Parc des Princes,Paris Saint-Germain,FC Lorient,diner,1
+2022-10-04,Stade Gabriel Montpied,Clermont Foot 63,Paris Saint-Germain,midi,0
+2022-10-04,Stade Gabriel Montpied,Clermont Foot 63,Paris Saint-Germain,diner,1
+2022-04-17,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,midi,0
+2022-04-17,Parc des Princes,Paris Saint-Germain,Olympique de Marseille,diner,1
+2022-04-20,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,midi,0
+2022-04-20,Stade Raymond Kopa,Angers SCO,Paris Saint-Germain,diner,1
+2022-04-24,Parc des Princes,Paris Saint-Germain,RC Lens,midi,0
+2022-04-24,Parc des Princes,Paris Saint-Germain,RC Lens,diner,1
+2022-01-05,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,midi,0
+2022-01-05,Stade de la Meinau,RC Strasbourg Alsace,Paris Saint-Germain,diner,1
+2022-08-05,Parc des Princes,Paris Saint-Germain,ESTAC Troyes,midi,0
+2022-08-05,Parc des Princes,Paris Saint-Germain,ESTAC Troyes,diner,1
+2022-05-14,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,midi,0
+2022-05-14,Stade de la Mosson,Montpellier Hérault SC,Paris Saint-Germain,diner,1
+2022-05-21,Parc des Princes,Paris Saint-Germain,FC Metz,midi,0
+2022-05-21,Parc des Princes,Paris Saint-Germain,FC Metz,diner,1
