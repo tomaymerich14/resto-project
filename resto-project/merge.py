@@ -17,36 +17,38 @@ def merge():
     psg = psg.drop(columns=['Location','Home Team', 'Away Team'])
     # Drop columns Vacs
     vac = vac.drop(columns=['Unnamed: 0'])
-    # Duplicate lines vacs
-    vac = pd.DataFrame(np.repeat(vac.values,2,axis=0),columns=['date','vacances_paris'])
-    # Set diner
-    vac['service']='diner'
-    # Set midi
-    for i in np.linspace(0,2920,1461):
-        vac['service'][i]='midi'
 
     #-------------------------------------------------------
 
     # Merge d2
     df_d2 = db.merge(hist_meteo, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg, how='outer', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg_ldc, how='outer', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vac, how='left', left_on=["date", "service"], right_on=["date","service"])
+    .merge(psg, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(psg_ldc, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(vac, how='left', left_on=["date"], right_on=["date"])
+
+    # Pb avec météo, on drop duplicates
+    df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
+
+    # Reset index
+    df_d2 = df_d2.reset_index(drop=True)
 
     # Stop fin juillet
-    df_d2 = df_d2[:1374]
+    df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
     # OK pour d2
 
-    # Merge d16
+    # Merge d16 ----------------------------------------------
     df_d16 = d16.merge(hist_meteo, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg, how='outer', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(psg_ldc, how='outer', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vac, how='left', left_on=["date", "service"], right_on=["date","service"])
+    .merge(psg, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(psg_ldc, how='left', left_on=["date", "service"], right_on=["date","service"])\
+    .merge(vac, how='left', left_on=["date"], right_on=["date"])
 
-    # Début ouverture, stop fin juillet
-    df_d16 = df_d16[9:877]
+    df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
+
+    df_d16 = df_d16.reset_index(drop=True)
+
+    df_d16 = df_d16[:df_d16.loc[df_d16['date']=='2021-07-31'].index[1]+1]
 
     # --------------- CSV ------------------------------------
 
