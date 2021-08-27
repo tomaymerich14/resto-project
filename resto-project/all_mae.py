@@ -26,7 +26,7 @@ def daily_service_maes():
     prov_dict = {}
     for y in ['soir','midi']:
         for i in ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']:
-            daily_service_series = X_mae_d2[X_mae_d2['jour']==i]
+            daily_service_series = X_mae_d2[(X_mae_d2['jour']==i) & (X_mae_d2['service']==y)]
             daily_service_mae = np.abs(daily_service_series['y_true']-daily_service_series['y_pred'])
             prov_dict[f'{i} {y}']=daily_service_mae.mean()
     daily_service_maes = pd.DataFrame(data=prov_dict, index=[0])
