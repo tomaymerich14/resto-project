@@ -49,11 +49,12 @@ def cyclical_columns():
     data_d2['cos_semaine_annee'] = np.cos(data_d2['semaine_annee_norm'])
     data_d2['sin_semaine_annee'] = np.sin(data_d2['semaine_annee_norm'])
 
-    data_d2.to_csv('../raw_data/preproc_data_d2.csv', index=False)
-    data_d16.to_csv('../raw_data/preproc_data_d16.csv',index=False)
 
     data_d2.drop(columns=['semaine_annee_norm','jour_annee_norm','mois_de_annee_norm','jour_du_mois_norm','jour_de_sem_norm','jour_de_sem','jour_du_mois','mois_de_annee','sem_de_annee','jour_annee'], inplace=True)
     data_d16.drop(columns=['semaine_annee_norm','jour_annee_norm','mois_de_annee_norm','jour_du_mois_norm','jour_de_sem_norm','jour_de_sem','jour_du_mois','mois_de_annee','sem_de_annee','jour_annee'], inplace=True)
+
+    data_d2.to_csv('../raw_data/preproc_data_d2.csv', index=False)
+    data_d16.to_csv('../raw_data/preproc_data_d16.csv',index=False)
     pass
 
 if __name__ == '__main__':
