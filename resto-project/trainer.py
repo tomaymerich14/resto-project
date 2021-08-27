@@ -107,8 +107,8 @@ class Trainer():
 
     def evaluate(self, X, y):
         pipe = self.pipeline
-        r2_score = cross_val_score(pipe, X_d2, y_d2, cv=20).mean()
-        mae = cross_val_score(pipe, X_d2, y_d2, cv=20, scoring='neg_mean_absolute_error').mean()
+        r2_score = cross_val_score(pipe, X, y, cv=20).mean()
+        mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
         self.mlflow_log_metric('r2_score', r2_score)
         self.mlflow_log_metric('mae',mae)
 
@@ -153,8 +153,6 @@ if __name__ == "__main__":
     test_D2 = True
     test_D16 = True
 
-
-
     ###CHOOSE THE MODEL ###
     from model import model_selection
 
@@ -173,12 +171,14 @@ if __name__ == "__main__":
     #mlflow_params_name_3 = ''
     #mlflow_params_value_3 = ''
 
-    if dataset_test_D2 == True:
+    if  test_D2 == True:
+        dataset_test_D2 = 'D2'
         train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
-    if dataset_test_D16 == True:
+    if  test_D16 == True:
+        dataset_test_D16 = 'D16'
         train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
