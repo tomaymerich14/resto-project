@@ -8,7 +8,7 @@ def merge():
     football_df = pd.read_csv('../exo_data/football_df.csv')
     db = pd.read_csv('../raw_data/df_dBourse.csv')
     d16 =pd.read_csv('../raw_data/df_DXVI.csv')
-    vacations_df = pd.read_csv('../exo_data/vacations_df.csv')
+    vacation_df = pd.read_csv('../exo_data/vacation_df.csv')
 
     #-------------------------------------------------------
 
@@ -16,7 +16,7 @@ def merge():
     df_d2 = db.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vacations_df, how='left', left_on=["date","service"], right_on=["date","service"])
+    .merge(vacation_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     # Pb avec météo, on drop duplicates
     df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
@@ -25,7 +25,7 @@ def merge():
     # Reset index
     df_d2 = df_d2.reset_index(drop=True)
 
-    # Stop fin juillet
+    # Stop en fin juillet
     df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
     # OK pour d2
 
@@ -33,7 +33,7 @@ def merge():
     df_d16 = d16.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
     .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vacations_df, how='left', left_on=["date","service"], right_on=["date","service"])
+    .merge(vacation_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
     df_d16.drop(columns=['CA_HT', 'TVA'], inplace=True)
