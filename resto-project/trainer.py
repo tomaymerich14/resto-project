@@ -178,17 +178,22 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
-    dataset_test_D2 = 'D2'
-    #dataset_test_D16 = 'D16'
+    dataset_test_D2 = True
+    dataset_test_D16 = True
 
-    ###CHOOSE THE MODEL ###
-    #model_test = DummyRegressor(strategy='median')
-    model_test = Ridge()
-    #model_test = ...
+    ###CHOOSE THE MODEL###
+    # -> possible models = 'Ridge', 'Dummy'
+    model_name = 'Dummy'
+
+    ###MLFLOW###
+    from model import model_selection
+    model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
-    mlflow_params_name_1 = ''
-    mlflow_params_value_1 = ''
+    from model import mflflow_params
+
+    mlflow_params_name_1 = mflflow_params(model_name)[0]
+    mlflow_params_value_1 = mflflow_params(model_name)[1]
     ###
     mlflow_params_name_2 = ''
     mlflow_params_value_2 = ''
@@ -196,22 +201,13 @@ if __name__ == "__main__":
     mlflow_params_name_3 = ''
     mlflow_params_value_3 = ''
 
-    try:
-        dataset_test_D2 == 'D2'
-    except NameError:
-        pass
-    else:
-        if dataset_test_D2 == 'D2':
-            train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
-            train_d2.run(model=model_test)
-            train_d2.evaluate(X_d2, y_d2)
+    ###RUN###
+    if dataset_test_D2 == True:
+        train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
+        train_d2.run(model=model_test)
+        train_d2.evaluate(X_d2, y_d2)
 
-    try:
-        dataset_test_D16 == 'D16'
-    except NameError:
-        pass
-    else:
-        if dataset_test_D16 == 'D16':
-            train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
-            train_d16.run(model=model_test)
-            train_d16.evaluate(X_d16, y_d16)
+    if dataset_test_D16 == True:
+        train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
+        train_d16.run(model=model_test)
+        train_d16.evaluate(X_d16, y_d16)
