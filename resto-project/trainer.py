@@ -129,7 +129,7 @@ class Trainer():
     @memoized_property
     def mlflow_run(self):
         return self.mlflow_client.create_run(self.mlflow_experiment_id)
-        #tags=dict(hello=b"True"),
+                                             #tags=dict(hello=b"True")
 
     def mlflow_log_param(self, key, value):
         self.mlflow_client.log_param(self.mlflow_run.info.run_id, key, value)
@@ -140,7 +140,7 @@ class Trainer():
 
 if __name__ == "__main__":
 
-    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2.csv')
+    preproc_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
     X_d2 = preproc_data_d2.drop(columns=["CA_TTC"])
@@ -149,8 +149,8 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
-    test_D2 = True
-    test_D16 = True
+    dataset_test_D2 = True
+    dataset_test_D16 = True
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
@@ -170,14 +170,12 @@ if __name__ == "__main__":
     #mlflow_params_name_3 = ''
     #mlflow_params_value_3 = ''
 
-    if test_D2 == True:
-        dataset_test_D2 = 'D2'
+    if dataset_test_D2 == True:
         train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
-    if test_D16 == True:
-        dataset_test_D16 = 'D16'
+    if dataset_test_D16 == True:
         train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
