@@ -9,7 +9,7 @@ from mlflow.tracking import MlflowClient
 from memoized_property import memoized_property
 
 #SKLEARN
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, train_test_split, cross_val_score
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, train_test_split, cross_val_score, cross_val_predict
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.compose import ColumnTransformer, make_column_transformer, make_column_selector
 from sklearn.impute import SimpleImputer, KNNImputer
@@ -107,11 +107,13 @@ class Trainer():
 
     def evaluate(self, X, y):
         pipe = self.pipeline
-        r2_score = cross_val_score(pipe, X_d2, y_d2, cv=20).mean()
+        mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
+
+        y_pred = cross_val_predict(pipe, X, y, cv=20)
+        
         self.mlflow_log_metric('r2_score', r2_score)
-
-
-
+        self.mlflow_log_metric('mae',mae)
+        return y_pred
     # MLFlow methods
     @memoized_property
     def mlflow_client(self):
@@ -129,7 +131,7 @@ class Trainer():
     @memoized_property
     def mlflow_run(self):
         return self.mlflow_client.create_run(self.mlflow_experiment_id)
-        #tags=dict(hello=b"True"),
+        #tags=dict(hello=b"True")
 
     def mlflow_log_param(self, key, value):
         self.mlflow_client.log_param(self.mlflow_run.info.run_id, key, value)
@@ -140,7 +142,7 @@ class Trainer():
 
 if __name__ == "__main__":
 
-    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2.csv')
+    preproc_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
     X_d2 = preproc_data_d2.drop(columns=["CA_TTC"])
@@ -149,14 +151,18 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
+
     test_D2 = True
     test_D16 = False
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
 
+
     ### -> possible models = 'Ridge', 'Dummy'
-    model_name = 'Dummy'
+    model_name = 'lightgbm'
+    ### -> possible models =
+    # 'Ridge', 'Dummy', 'XGBRegressor','GradientBoostingRegressor'
     model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
@@ -171,13 +177,26 @@ if __name__ == "__main__":
     #mlflow_params_value_3 = ''
 
     if test_D2 == True:
-        dataset_test_D2 = 'D2'
-        train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
+        resto_name = 'D2'
+        train_d2 = Trainer(X_d2, y_d2, resto_name)
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
+
+        y_pred = train_d2.evaluate(X_d2, y_d2)
+        df = pd.DataFrame(data={'y_true':y_d2, 'y_pred':y_pred})
+        X_d2['y_true']=y_d2
+        X_d2['y_pred']=y_pred
+        X_d2.to_csv('../raw_data/features_mae_d2.csv',sep=',')
+
     if test_D16 == True:
-        dataset_test_D16 = 'D16'
-        train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
+        resto_name = 'D16'
+        train_d16 = Trainer(X_d16, y_d16, resto_name)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
+
+        y_pred = train_d2.evaluate(X_d16, y_d16)
+        df = pd.DataFrame(data={'y_true':y_d16, 'y_pred':y_pred})
+        X_d16['y_true']=y_d16
+        X_d16['y_pred']=y_pred
+        X_d16.to_csv('../raw_data/features_mae_d16.csv',sep=',')

@@ -3,20 +3,14 @@ import numpy as np
 from cyclical import cyclical_columns
 def merge():
 
-    events = pd.read_csv('../exo_data/events.csv')
-    weather_df = pd.read_csv('../exo_data/weather_df.csv')
-    football_df = pd.read_csv('../exo_data/football_df.csv')
     db = pd.read_csv('../raw_data/df_feat_d2.csv')
     d16 =pd.read_csv('../raw_data/df_feat_d16.csv')
-    vacation_df = pd.read_csv('../exo_data/vacation_df.csv')
+    all_events = pd.read_csv('../exo_data/all_events_sport_and_weather.
 
     #-------------------------------------------------------
 
     # Merge d2
-    df_d2 = db.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vacation_df, how='left', left_on=["date","service"], right_on=["date","service"])
+    df_d2 = db.merge(all_events, how='left', left_on=["date", "service"], right_on=["date","service"])
 
     # Pb avec météo, on drop duplicates
     df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
@@ -30,10 +24,7 @@ def merge():
     # OK pour d2
 
     # Merge d16 ----------------------------------------------
-    df_d16 = d16.merge(weather_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(events, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(football_df, how='left', left_on=["date", "service"], right_on=["date","service"])\
-    .merge(vacation_df, how='left', left_on=["date","service"], right_on=["date","service"])
+    df_d16 = d16.merge(all_events, how='left', left_on=["date", "service"], right_on=["date","service"])
 
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
     df_d16.drop(columns=['CA_HT', 'TVA'], inplace=True)
