@@ -149,8 +149,11 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
-    dataset_test_D2 = True
-    dataset_test_D16 = True
+
+    test_D2 = True
+    test_D16 = True
+
+
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
