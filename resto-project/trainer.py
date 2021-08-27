@@ -108,9 +108,9 @@ class Trainer():
     def evaluate(self, X, y):
         pipe = self.pipeline
         r2_score = cross_val_score(pipe, X_d2, y_d2, cv=20).mean()
+        mae = cross_val_score(pipe, X_d2, y_d2, cv=20, scoring='neg_mean_absolute_error').mean()
         self.mlflow_log_metric('r2_score', r2_score)
-
-
+        self.mlflow_log_metric('mae',mae)
 
     # MLFlow methods
     @memoized_property
@@ -149,14 +149,14 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
-    test_D2 = True
-    test_D16 = False
+    test_D2 = False
+    test_D16 = True
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
 
     ### -> possible models = 'Ridge', 'Dummy'
-    model_name = 'Dummy'
+    model_name = 'XGBRegressor'
     model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
