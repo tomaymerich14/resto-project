@@ -190,8 +190,8 @@ if __name__ == "__main__":
         train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
-        y_pred = train_d2.evaluate(X_d16, y_d16)
 
+        y_pred = train_d2.evaluate(X_d16, y_d16)
         df = pd.DataFrame(data={'y_true':y_d16, 'y_pred':y_pred})
         X_d16['y_true']=y_d16
         X_d16['y_pred']=y_pred
