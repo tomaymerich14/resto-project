@@ -9,7 +9,7 @@ from mlflow.tracking import MlflowClient
 from memoized_property import memoized_property
 
 #SKLEARN
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, train_test_split, cross_val_score
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, train_test_split, cross_val_score, cross_val_predict
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.compose import ColumnTransformer, make_column_transformer, make_column_selector
 from sklearn.impute import SimpleImputer, KNNImputer
@@ -109,9 +109,10 @@ class Trainer():
         pipe = self.pipeline
         r2_score = cross_val_score(pipe, X, y, cv=20).mean()
         mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
+        y_pred = cross_val_predict(pipe, X, y, cv=20)
         self.mlflow_log_metric('r2_score', r2_score)
         self.mlflow_log_metric('mae',mae)
-
+        return y_pred
     # MLFlow methods
     @memoized_property
     def mlflow_client(self):
@@ -151,13 +152,13 @@ if __name__ == "__main__":
     ###CHOOSE THE DATASET###
 
     test_D2 = True
-    test_D16 = True
+    test_D16 = False
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
 
     ### -> possible models = 'Ridge', 'Dummy'
-    model_name = 'XGBRegressor'
+    model_name = 'lightgbm'
     model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
@@ -177,8 +178,21 @@ if __name__ == "__main__":
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
+        y_pred = train_d2.evaluate(X_d2, y_d2)
+        df = pd.DataFrame(data={'y_true':y_d2, 'y_pred':y_pred})
+        X_d2['y_true']=y_d2
+        X_d2['y_pred']=y_pred
+        X_d2.to_csv('mae1.csv',sep=',')
+
+
     if  test_D16 == True:
         dataset_test_D16 = 'D16'
         train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
+        y_pred = train_d2.evaluate(X_d16, y_d16)
+
+        df = pd.DataFrame(data={'y_true':y_d16, 'y_pred':y_pred})
+        X_d16['y_true']=y_d16
+        X_d16['y_pred']=y_pred
+        X_d16.to_csv('mae2.csv',sep=',')
