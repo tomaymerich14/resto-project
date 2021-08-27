@@ -6,8 +6,8 @@ def merge():
     events = pd.read_csv('../exo_data/events.csv')
     weather_df = pd.read_csv('../exo_data/weather_df.csv')
     football_df = pd.read_csv('../exo_data/football_df.csv')
-    db = pd.read_csv('../raw_data/df_dBourse.csv')
-    d16 =pd.read_csv('../raw_data/df_DXVI.csv')
+    db = pd.read_csv('../raw_data/df_feat_d2.csv')
+    d16 =pd.read_csv('../raw_data/df_feat_d16.csv')
     vacation_df = pd.read_csv('../exo_data/vacation_df.csv')
 
     #-------------------------------------------------------
@@ -26,7 +26,7 @@ def merge():
     df_d2 = df_d2.reset_index(drop=True)
 
     # Stop en fin juillet
-    df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
+    #df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
     # OK pour d2
 
     # Merge d16 ----------------------------------------------
@@ -40,7 +40,7 @@ def merge():
 
     df_d16 = df_d16.reset_index(drop=True)
 
-    df_d16 = df_d16[:df_d16.loc[df_d16['date']=='2021-07-31'].index[1]+1]
+    #df_d16 = df_d16[:df_d16.loc[df_d16['date']=='2021-07-31'].index[1]+1]
 
     # --------------- CSV ------------------------------------
 
