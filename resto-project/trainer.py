@@ -107,10 +107,8 @@ class Trainer():
 
     def evaluate(self, X, y):
         pipe = self.pipeline
-        r2_score = cross_val_score(pipe, X, y, cv=20).mean()
-        self.mlflow_log_metric('r2_score', r2_score)
-
-
+        mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
+        self.mlflow_log_metric('mae',mae)
 
     # MLFlow methods
     @memoized_property
@@ -149,14 +147,17 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
+
     test_D2 = True
     test_D16 = True
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
 
-    ### -> possible models = 'Ridge', 'Dummy'
-    model_name = 'Ridge'
+    ### -> possible models =
+    # 'Ridge', 'Dummy', 'XGBRegressor','GradientBoostingRegressor'
+
+    model_name = 'XGBRegressor'
     model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
@@ -171,13 +172,13 @@ if __name__ == "__main__":
     #mlflow_params_value_3 = ''
 
     if test_D2 == True:
-        dataset_test_D2 = 'D2'
-        train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
+        resto_name = 'D2'
+        train_d2 = Trainer(X_d2, y_d2, resto_name)
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
     if test_D16 == True:
-        dataset_test_D16 = 'D16'
-        train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
+        resto_name = 'D16'
+        train_d16 = Trainer(X_d16, y_d16, resto_name)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
