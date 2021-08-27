@@ -1,5 +1,13 @@
 import numpy as np
-def cyclical_columns(data_d16, data_d2):
+import pandas as pd
+
+def cyclical_columns():
+
+    dataset_d16 = '../raw_data/preproc_data_d16.csv'
+    dataset_d2 = '../raw_data/preproc_data_d2.csv'
+
+    data_d16 = pd.read_csv(dataset_d16)
+    data_d2 = pd.read_csv(dataset_d2)
         # ----------------Create cyclical columns ----------------
     data_d16['jour_de_sem_norm'] = 2* np.pi * data_d16['jour_de_sem'] / max(data_d16['jour_de_sem'])
     data_d16['cos_jour_de_sem'] = np.cos(data_d16['jour_de_sem_norm'])
@@ -41,4 +49,9 @@ def cyclical_columns(data_d16, data_d2):
     data_d2['cos_semaine_annee'] = np.cos(data_d2['semaine_annee_norm'])
     data_d2['sin_semaine_annee'] = np.sin(data_d2['semaine_annee_norm'])
 
-    return data_d16, data_d2
+    data_d2.to_csv('../raw_data/preproc_data_d2.csv', index=False)
+    data_d16.to_csv('../raw_data/preproc_data_d16.csv',index=False)
+    pass
+
+if __name__ == '__main__':
+    cyclical_columns()
