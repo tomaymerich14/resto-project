@@ -1,4 +1,4 @@
-date,service,match_edf,roland_garros,fashion_week,match_happening,match_happening_cl,temp,feels_like,temp_min,temp_max,wind_speed,clouds_all,vacances_paris,clear,clouds,drizzle,drizzle_and_ain,fog,mist,rain,thunderstorm
+date,service,match_edf,roland_garros,fashion_week,match_happening,match_happening_cl,temp,feels_like,temp_min,temp_max,wind_speed,clouds_all,vacances_paris,clear,clouds,drizzle,drizzle_and_rain,fog,mist,rain,thunderstorm
 2019-01-01,midi,0,0,0,0.0,0.0,281.44,280.15,280.58,282.24,2.24,90,1,0,overcast clouds,0,0,0,0,0,0
 2019-01-01,soir,0,0,0,0.0,0.0,280.87,280.87,279.48,281.45,0.45,90,1,0,0,light intensity drizzle,0,0,0,0,0
 2019-01-02,midi,0,0,0,0.0,0.0,279.57,278.92,278.83,280.31,1.34,90,1,0,overcast clouds,0,0,0,0,0,0
