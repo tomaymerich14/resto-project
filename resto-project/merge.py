@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from cyclical import cyclical_columns
 def merge():
 
     events = pd.read_csv('../exo_data/events.csv')
@@ -20,6 +20,7 @@ def merge():
 
     # Pb avec météo, on drop duplicates
     df_d2 = df_d2.drop_duplicates(subset=['date', 'service'], keep='first')
+    df_d2.drop(columns = ['CA_HT','TVA'], inplace= True)
 
     # Reset index
     df_d2 = df_d2.reset_index(drop=True)
@@ -35,6 +36,7 @@ def merge():
     .merge(vacation_df, how='left', left_on=["date","service"], right_on=["date","service"])
 
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
+    df_d16.drop(columns=['CA_HT', 'TVA'], inplace=True)
 
     df_d16 = df_d16.reset_index(drop=True)
 
@@ -48,7 +50,11 @@ def merge():
     #CSV preproc_data_d16
     df_d16.to_csv('../raw_data/preproc_data_d16.csv', index=False)
 
+    cyclical_columns()
+
     pass
+
+
 
 if __name__ == '__main__':
     merge()

@@ -42,14 +42,14 @@ class Trainer():
     def set_pipeline(self, model):
         # set features
         feat_ordinal_dict = {
-        'Clear': ['0',0,'sky is clear'],
-        'Clouds': ['0', 0,'scattered clouds','few clouds','broken clouds','overcast clouds'],
-        'Drizzle': ['0',0,'light intensity drizzle','drizzle','heavy intensity drizzle'],
-        'Drizzle_and_Rain': ['0',0,'light intensity drizzle rain','rain and drizzle'],
-        'Fog': ['0',0,'fog'],
-        'Mist': ['0',0,'mist'],
-        'Rain': ['0',0,'light rain','light intensity shower rain','moderate rain','heavy intensity rain'],
-        'Thunderstorm': ['0',0,'proximity thunderstorm','thunderstorm','thunderstorm with light rain','thunderstorm with heavy rain']
+        'clear': ['0',0,'sky is clear'],
+        'clouds': ['0', 0,'scattered clouds','few clouds','broken clouds','overcast clouds'],
+        'drizzle': ['0',0,'light intensity drizzle','drizzle','heavy intensity drizzle'],
+        'drizzle_and_rain': ['0',0,'light intensity drizzle rain','rain and drizzle'],
+        'fog': ['0',0,'fog'],
+        'mist': ['0',0,'mist'],
+        'rain': ['0',0,'light rain','light intensity shower rain','moderate rain','heavy intensity rain'],
+        'thunderstorm': ['0',0,'proximity thunderstorm','thunderstorm','thunderstorm with light rain','thunderstorm with heavy rain']
         }
 
 
@@ -70,31 +70,29 @@ class Trainer():
             RobustScaler()
         )
 
-        categorical_features = [
-            'date', 'jour', 'service', 'weather_main', 'weather_description',
-            'Match Happening', 'Match Happening-CL', 'match_edf',
-            'roland_garros', 'fashion_week'
-        ]
-
-        numerical_features = [
-            'temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'clouds_all'
-        ]
-        ordinal_features = [
-            'Clear', 'Clouds', 'Drizzle', 'Drizzle and Rain', 'Fog', 'Mist', 'Rain',
-            'Thunderstorm'
-        ]
+        categorical_features = ['date','jour', 'service', 'match_happening', 'match_happening_cl', 'match_edf', 'roland_garros', 'fashion_week','vacances_paris']
+        cyclical_features = ['cos_jour_de_sem','sin_jour_de_sem', 'cos_jour_du_mois', 'sin_jour_du_mois','cos_mois_de_annee', 'sin_mois_de_annee', 'cos_jour_annee','sin_jour_annee', 'cos_semaine_annee', 'sin_semaine_annee']
+        numerical_features = ['moyen_7_services','moyen_31_services','moyenne_3der_j&service','temp', 'feels_like', 'temp_min', 'temp_max', 'wind_speed', 'clouds_all']
+        ordinal_features =['clear', 'clouds', 'drizzle', 'drizzle_and_rain', 'fog', 'mist', 'rain', 'thunderstorm']
 
         #set preproc
-        preproc_numerical = make_pipeline(KNNImputer(), RobustScaler())
-
         preproc_categorical = make_pipeline(
             SimpleImputer(strategy="constant", fill_value="missing"),
             OneHotEncoder(handle_unknown="ignore"))
 
-        preproc = make_column_transformer((preproc_numerical, numerical_features),
-                                        (preproc_categorical, categorical_features),
-                                        (preproc_ordinal, ordinal_features),
-                                        remainder="drop")
+        preproc_cyclical = make_pipeline(
+            KNNImputer())
+
+        preproc_numerical = make_pipeline(
+            KNNImputer(),
+            RobustScaler())
+
+        preproc = make_column_transformer(
+            (preproc_categorical, categorical_features),
+            (preproc_cyclical, cyclical_features),
+            (preproc_numerical, numerical_features),
+            (preproc_ordinal, ordinal_features),
+            remainder ="drop")
 
         #set pipe
         self.pipeline = make_pipeline(preproc, model)
@@ -104,33 +102,7 @@ class Trainer():
         self.set_pipeline(model)
         self.pipeline.fit(self.X, self.y)
 
-        try:
-            len(mlflow_params_name_1) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_1) > 0:
-                return self.mlflow_log_param(mlflow_params_name_1,
-                                             mlflow_params_value_1)
-
-        try:
-            len(mlflow_params_name_2) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_2) > 0:
-                return self.mlflow_log_param(mlflow_params_name_2,
-                                             mlflow_params_value_2)
-
-        try:
-            len(mlflow_params_name_3) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_3) > 0:
-                return self.mlflow_log_param(mlflow_params_name_2,
-                                             mlflow_params_value_2)
-
+        self.mlflow_log_param(mlflow_params_name_1, mlflow_params_value_1)
 
 
     def evaluate(self, X, y):
@@ -156,9 +128,8 @@ class Trainer():
 
     @memoized_property
     def mlflow_run(self):
-        return self.mlflow_client.create_run(self.mlflow_experiment_id,
-                                             tags=dict(hello=b"True"),
-                                             UserDict=dict(hello=b"True"))
+        return self.mlflow_client.create_run(self.mlflow_experiment_id)
+        #tags=dict(hello=b"True"),
 
     def mlflow_log_param(self, key, value):
         self.mlflow_client.log_param(self.mlflow_run.info.run_id, key, value)
@@ -169,7 +140,7 @@ class Trainer():
 
 if __name__ == "__main__":
 
-    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2_test_2.csv')
+    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
     X_d2 = preproc_data_d2.drop(columns=["CA_TTC"])
@@ -178,40 +149,35 @@ if __name__ == "__main__":
     y_d16 = preproc_data_d16.CA_TTC
 
     ###CHOOSE THE DATASET###
-    dataset_test_D2 = 'D2'
-    #dataset_test_D16 = 'D16'
+    test_D2 = True
+    test_D16 = False
 
     ###CHOOSE THE MODEL ###
-    #model_test = DummyRegressor(strategy='median')
-    model_test = Ridge()
-    #model_test = ...
+    from model import model_selection
+
+    ### -> possible models = 'Ridge', 'Dummy'
+    model_name = 'Dummy'
+    model_test = model_selection(model_name)
 
     ###CHOOSE MLF PARAMS###
-    mlflow_params_name_1 = ''
-    mlflow_params_value_1 = ''
+    from mlflow_params import get_params
+    mlflow_params_name_1 = get_params(model_name)[0]
+    mlflow_params_value_1 = get_params(model_name)[1]
     ###
-    mlflow_params_name_2 = ''
-    mlflow_params_value_2 = ''
+    #mlflow_params_name_2 = ''
+    #mlflow_params_value_2 = ''
     ###
-    mlflow_params_name_3 = ''
-    mlflow_params_value_3 = ''
+    #mlflow_params_name_3 = ''
+    #mlflow_params_value_3 = ''
 
-    try:
-        dataset_test_D2 == 'D2'
-    except NameError:
-        pass
-    else:
-        if dataset_test_D2 == 'D2':
-            train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
-            train_d2.run(model=model_test)
-            train_d2.evaluate(X_d2, y_d2)
+    if test_D2 == True:
+        dataset_test_D2 = 'D2'
+        train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
+        train_d2.run(model=model_test)
+        train_d2.evaluate(X_d2, y_d2)
 
-    try:
-        dataset_test_D16 == 'D16'
-    except NameError:
-        pass
-    else:
-        if dataset_test_D16 == 'D16':
-            train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
-            train_d16.run(model=model_test)
-            train_d16.evaluate(X_d16, y_d16)
+    if test_D16 == True:
+        dataset_test_D16 = 'D16'
+        train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
+        train_d16.run(model=model_test)
+        train_d16.evaluate(X_d16, y_d16)
