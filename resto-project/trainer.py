@@ -110,8 +110,8 @@ class Trainer():
         mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
 
         y_pred = cross_val_predict(pipe, X, y, cv=20)
-        
-        self.mlflow_log_metric('r2_score', r2_score)
+
+        #self.mlflow_log_metric('r2_score', r2_score)
         self.mlflow_log_metric('mae',mae)
         return y_pred
     # MLFlow methods
