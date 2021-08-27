@@ -5,8 +5,8 @@ from statistics import mean
 
 #----------------------------------------
 
-df_d2 = pd.read_csv('/Users/tomaymerich/code/tomaymerich14/resto-project/raw_data/df_raw_d2.csv')
-df_d16 =pd.read_csv('/Users/tomaymerich/code/tomaymerich14/resto-project/raw_data/df_raw_d16.csv')
+df_d2 = pd.read_csv('../raw_data/df_raw_d2.csv')
+df_d16 =pd.read_csv('../raw_data/df_raw_d16.csv')
 
 #------ D2 data date --------------------
 
