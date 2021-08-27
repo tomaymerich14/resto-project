@@ -102,33 +102,7 @@ class Trainer():
         self.set_pipeline(model)
         self.pipeline.fit(self.X, self.y)
 
-        try:
-            len(mlflow_params_name_1) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_1) > 0:
-                return self.mlflow_log_param(mlflow_params_name_1,
-                                             mlflow_params_value_1)
-
-        try:
-            len(mlflow_params_name_2) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_2) > 0:
-                return self.mlflow_log_param(mlflow_params_name_2,
-                                             mlflow_params_value_2)
-
-        try:
-            len(mlflow_params_name_3) > 0
-        except NameError:
-            pass
-        else:
-            if len(mlflow_params_name_3) > 0:
-                return self.mlflow_log_param(mlflow_params_name_2,
-                                             mlflow_params_value_2)
-
+        self.mlflow_log_param(mlflow_params_name_1, mlflow_params_value_1)
 
 
     def evaluate(self, X, y):
@@ -154,9 +128,8 @@ class Trainer():
 
     @memoized_property
     def mlflow_run(self):
-        return self.mlflow_client.create_run(self.mlflow_experiment_id,
-                                             tags=dict(hello=b"True"),
-                                             UserDict=dict(hello=b"True"))
+        return self.mlflow_client.create_run(self.mlflow_experiment_id)
+                                             #tags=dict(hello=b"True"),
 
     def mlflow_log_param(self, key, value):
         self.mlflow_client.log_param(self.mlflow_run.info.run_id, key, value)
@@ -191,18 +164,18 @@ if __name__ == "__main__":
     mlflow_params_name_1 = get_params(model_name)[0]
     mlflow_params_value_1 = get_params(model_name)[1]
     ###
-    mlflow_params_name_2 = ''
-    mlflow_params_value_2 = ''
+    #mlflow_params_name_2 = ''
+    #mlflow_params_value_2 = ''
     ###
-    mlflow_params_name_3 = ''
-    mlflow_params_value_3 = ''
+    #mlflow_params_name_3 = ''
+    #mlflow_params_value_3 = ''
 
     if dataset_test_D2 == True:
         train_d2 = Trainer(X_d2, y_d2, dataset_test_D2)
         train_d2.run(model=model_test)
         train_d2.evaluate(X_d2, y_d2)
 
-    if dataset_test_D16 == False:
+    if dataset_test_D16 == True:
         train_d16 = Trainer(X_d16, y_d16, dataset_test_D16)
         train_d16.run(model=model_test)
         train_d16.evaluate(X_d16, y_d16)
