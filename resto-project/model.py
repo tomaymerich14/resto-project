@@ -1,7 +1,5 @@
-#SKLEARN
-from sklearn.linear_model import Ridge, Lasso, LinearRegression
+from sklearn.linear_model import Ridge
 from sklearn.dummy import DummyRegressor
-
 
 def model_selection(model_name):
     if model_name == 'Ridge':
