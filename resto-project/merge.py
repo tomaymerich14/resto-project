@@ -5,7 +5,7 @@ def merge():
 
     db = pd.read_csv('../raw_data/df_feat_d2.csv')
     d16 =pd.read_csv('../raw_data/df_feat_d16.csv')
-    all_events = pd.read_csv('../exo_data/all_events_sport_and_weather.
+    all_events = pd.read_csv('../exo_data/all_events_sport_and_weather.csv')
 
     #-------------------------------------------------------
 
