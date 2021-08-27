@@ -182,7 +182,7 @@ if __name__ == "__main__":
         df = pd.DataFrame(data={'y_true':y_d2, 'y_pred':y_pred})
         X_d2['y_true']=y_d2
         X_d2['y_pred']=y_pred
-        X_d2.to_csv('mae1.csv',sep=',')
+        X_d2.to_csv('../raw_data/features_mae_d2.csv',sep=',')
 
 
     if  test_D16 == True:
@@ -195,4 +195,4 @@ if __name__ == "__main__":
         df = pd.DataFrame(data={'y_true':y_d16, 'y_pred':y_pred})
         X_d16['y_true']=y_d16
         X_d16['y_pred']=y_pred
-        X_d16.to_csv('mae2.csv',sep=',')
+        X_d16.to_csv('../raw_data/features_mae_d16.csv',sep=',')
