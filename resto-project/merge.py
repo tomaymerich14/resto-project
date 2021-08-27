@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from cyclical import cyclical_columns
 def merge():
 
     events = pd.read_csv('../exo_data/events.csv')
@@ -48,7 +48,11 @@ def merge():
     #CSV preproc_data_d16
     df_d16.to_csv('../raw_data/preproc_data_d16.csv', index=False)
 
+    cyclical_columns()
+
     pass
+
+
 
 if __name__ == '__main__':
     merge()
