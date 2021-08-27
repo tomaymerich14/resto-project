@@ -171,6 +171,6 @@ df_d16 = new_df.sort_values(by='date')
 
 #---- To CSV --------------------------------------
 
-df_d16.to_csv('/Users/tomaymerich/code/tomaymerich14/resto-project/raw_data/df_feat_d16.csv', index=False)
+df_d16.to_csv('../raw_data/df_feat_d16.csv', index=False)
 
-df_d2.to_csv('/Users/tomaymerich/code/tomaymerich14/resto-project/raw_data/df_feat_d2.csv', index=False)
+df_d2.to_csv('../raw_data/df_feat_d2.csv', index=False)
