@@ -169,7 +169,7 @@ class Trainer():
 
 if __name__ == "__main__":
 
-    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2_test_2.csv')
+    preproc_data_d2=pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
     X_d2 = preproc_data_d2.drop(columns=["CA_TTC"])
