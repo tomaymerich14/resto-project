@@ -11,6 +11,7 @@ def daily_maes():
         daily_mae = np.abs(daily_series['y_true']-daily_series['y_pred'])
         prov_dict[i]=daily_mae.mean()
     daily_maes = pd.DataFrame(data=prov_dict, index=[0])
+    print(daily_maes)
     daily_maes.to_csv('../raw_data/daily_maes.csv')
 
 def service_maes():
@@ -20,6 +21,7 @@ def service_maes():
         service_mae = np.abs(service_series['y_true']-service_series['y_pred'])
         prov_dict[i]=service_mae.mean()
     service_maes = pd.DataFrame(data=prov_dict, index=[0])
+    print(service_maes)
     service_maes.to_csv('../raw_data/service_maes.csv')
 
 def daily_service_maes():
