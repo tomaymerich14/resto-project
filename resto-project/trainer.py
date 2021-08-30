@@ -18,6 +18,8 @@ from sklearn.compose import make_column_transformer
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
 from sklearn.preprocessing import OrdinalEncoder
+from xgboost import XGBRegressor
+from sklearn.model_selection import RepeatedKFold
 
 MLFLOW_URI = 'https://mlflow.lewagon.co/'
 
@@ -111,7 +113,8 @@ class Trainer():
 
     def evaluate(self, X, y):
         pipe = self.pipeline
-        y_pred = cross_val_score(pipe, X, y, cv=5, scoring='neg_mean_absolute_error', n_jobs=-1)
+        cv = RepeatedKFold(n_splits=5, n_repeats=2, random_state=0)
+        y_pred = cross_val_score(pipe, X, y, cv=cv, scoring='neg_mean_absolute_error', n_jobs=-1)
         mae = np.mean(y_pred)
         std = np.std(y_pred)
         self.mlflow_log_metric('mae', mae)
@@ -154,10 +157,16 @@ if __name__ == "__main__":
     preproc_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
-    from get_dataframe import get_XY
+    def get_XY(df):
+        X = df.drop(columns=["CA_TTC"])
+        y = df.CA_TTC
+        return X, y
 
+    ### DAROCO BOURSE
     X_d2 = get_XY(preproc_data_d2)[0]
     y_d2 = get_XY(preproc_data_d2)[1]
+
+    ### DAROCO 16
     X_d16 = get_XY(preproc_data_d16)[0]
     y_d16 = get_XY(preproc_data_d16)[1]
 
@@ -167,18 +176,24 @@ if __name__ == "__main__":
     test_D16 = True
 
     ###CHOOSE THE MODEL ###
-    from model import model_selection
 
     # go to model.py
 
+    ### -> possible models =
+    # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
+
     ###CHOOSE PARAMS###
     model_name = 'XGB'
-    max_depth = 4
-    n_estimators = 200
-    learning_rate = 0.1
+    max_depth = [4,3]
+    n_estimators = [65,60]
+    learning_rate = [0.08,0.08]
 
-    model_test = model_selection(model_name)
-
+    model_test_D2 = XGBRegressor(max_depth=max_depth[0],
+                              n_estimators=n_estimators[0],
+                              learning_rate=learning_rate[0])
+    model_test_D16 = XGBRegressor(max_depth=max_depth[1],
+                              n_estimators=n_estimators[1],
+                              learning_rate=learning_rate[1])
 
     ###GRIDSEARCH###
     allow_grid_search = False #not working yet
@@ -194,14 +209,20 @@ if __name__ == "__main__":
     if test_D2 == True:
         resto_name = 'D2'
         train_d2 = Trainer(X_d2, y_d2, resto_name)
-        train_d2.run(model=model_test)
+        train_d2.run(model=model_test_D2)
         train_d2.evaluate(X_d2, y_d2)
+        #save_model_locally()
+        #storage_upload()
 
     if test_D16 == True:
         resto_name = 'D16'
         train_d16 = Trainer(X_d16, y_d16, resto_name)
-        train_d16.run(model=model_test)
+        train_d16.run(model=model_test_D16)
         train_d16.evaluate(X_d16, y_d16)
+        #trainer.save_model_locally()
+        #storage_upload()
+
+
 
     ###TO DO###
 
