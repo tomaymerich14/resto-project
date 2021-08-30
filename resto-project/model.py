@@ -9,8 +9,8 @@ from catboost import CatBoostRegressor
 
 model_name = 'XGB'
 max_depth = 4
-n_estimators = 40
-learning_rate = 0.1
+n_estimators = 200
+learning_rate = 0.05
 
 def get_params_values(max_depth, n_estimators, learning_rate):
     params = f'max_depth = {max_depth}, n_estimators = {n_estimators}, learning_rate = {learning_rate}'
