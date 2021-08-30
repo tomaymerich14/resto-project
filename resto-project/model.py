@@ -24,7 +24,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
-from tabnet import TabNetClassifier, TabNetRegressor
+from tabnet import TabNetClassifier, TabNetRegression
 
 def model_selection(model_name):
     if model_name == 'Ridge':
@@ -37,6 +37,6 @@ def model_selection(model_name):
         model_test = XGBRegressor(max_depth=10, n_estimators=300, learning_rate=0.05)
     if model_name == 'lightgbm':
         model_test = LGBMRegressor()
-    if model_name == 'tabnet':
-        model_test = TabNetRegressor()
+    #if model_name == 'tabnet':
+        #model_test = TabNetRegression(num_regressors=100, feature_columns = )
     return model_test
