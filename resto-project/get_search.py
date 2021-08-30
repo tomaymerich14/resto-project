@@ -1,10 +1,13 @@
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, RepeatedKFold
 from get_dataframe import get_XY, get_service
 from model import model_selection
 from sklearn.pipeline import make_pipeline
 from tempfile import mkdtemp
 import numpy as np
 from trainer import Trainer
+from numpy import mean
+from numpy import std
+
 
 cachedir = mkdtemp()
 

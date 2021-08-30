@@ -163,8 +163,12 @@ if __name__ == "__main__":
     test_D16 = True
 
     ###CHOOSE THE MODEL ###
-    from model import model_selection
     from model import get_model_names
+    from model import model_selection
+
+    # go to model.py
+
+
     ### -> possible models =
     # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
     model_name = get_model_names()[3]
@@ -174,7 +178,7 @@ if __name__ == "__main__":
     n_estimators = 40
     learning_rate = 0.1
 
-    model_test = model_selection(model_name, *max_depth, *n_estimators, *learning_rate)
+    model_test = model_selection(model_name)
 
 
     ###GRIDSEARCH###
