@@ -6,6 +6,7 @@ def merge():
     d16 =pd.read_csv('../raw_data/df_feat_d16.csv')
     all_events = pd.read_csv('../exo_data/all_events_sport_and_weather.csv')
 
+
     #-------------------------------------------------------
 
     # Merge d2
