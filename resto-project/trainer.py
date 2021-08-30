@@ -171,9 +171,6 @@ if __name__ == "__main__":
 
     # go to model.py
 
-    ### -> possible models =
-    # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
-
     ###CHOOSE PARAMS###
     model_name = 'XGB'
     max_depth = 4
