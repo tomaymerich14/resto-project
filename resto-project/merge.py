@@ -3,9 +3,8 @@ import numpy as np
 from cyclical import cyclical_columns
 def merge():
 
-
-    db = pd.read_csv('../raw_data/df_dBourse.csv')
-    d16 =pd.read_csv('../raw_data/df_DXVI.csv')
+    db = pd.read_csv('../raw_data/df_feat_d2.csv')
+    d16 =pd.read_csv('../raw_data/df_feat_d16.csv')
     all_events = pd.read_csv('../exo_data/all_events_sport_and_weather.csv')
 
     #-------------------------------------------------------
@@ -21,7 +20,7 @@ def merge():
     df_d2 = df_d2.reset_index(drop=True)
 
     # Stop en fin juillet
-    df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
+    #df_d2 = df_d2[:df_d2.loc[df_d2['date']=='2021-07-31'].index[1]+1]
     # OK pour d2
 
     # Merge d16 ----------------------------------------------
@@ -32,7 +31,7 @@ def merge():
 
     df_d16 = df_d16.reset_index(drop=True)
 
-    df_d16 = df_d16[:df_d16.loc[df_d16['date']=='2021-07-31'].index[1]+1]
+    #df_d16 = df_d16[:df_d16.loc[df_d16['date']=='2021-07-31'].index[1]+1]
 
     # --------------- CSV ------------------------------------
 

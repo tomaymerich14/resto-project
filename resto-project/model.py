@@ -1,3 +1,4 @@
+from pandas.core.algorithms import mode
 from sklearn.linear_model import Ridge
 from sklearn.dummy import DummyRegressor
 from scipy import stats
@@ -22,6 +23,7 @@ from sklearn.ensemble import StackingRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 from xgboost import XGBRegressor
+from lightgbm import LGBMRegressor
 
 def model_selection(model_name):
     if model_name == 'Ridge':
@@ -32,4 +34,6 @@ def model_selection(model_name):
         model_test = GradientBoostingRegressor(n_estimators=200, verbose=0, max_depth=5, learning_rate=0.05)
     if model_name == 'XGBRegressor':
         model_test = XGBRegressor(max_depth=10, n_estimators=300, learning_rate=0.05)
+    if model_name == 'lightgbm':
+        model_test = LGBMRegressor()
     return model_test

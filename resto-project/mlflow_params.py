@@ -16,4 +16,7 @@ def get_params(model_name):
     if model_name == 'XGBRegressor':
         mlflow_params_name_1 = 'all_params'
         mlflow_params_value_1 = 'ax_depth=10, n_estimators=300, learning_rate=0.05'
+    if model_name == 'lightgbm':
+        mlflow_params_name_1 = 'all_params'
+        mlflow_params_value_1 = 'all'
     return mlflow_params_name_1, mlflow_params_value_1
