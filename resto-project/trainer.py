@@ -153,7 +153,7 @@ if __name__ == "__main__":
     ###CHOOSE THE DATASET###
 
     test_D2 = True
-    test_D16 = False
+    test_D16 = True
 
     ###CHOOSE THE MODEL ###
     from model import model_selection
