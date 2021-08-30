@@ -2,7 +2,6 @@ from os import pathconf
 import pandas as pd
 import numpy as np
 
-#'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/CA_DarocoBourse.xlsx'
 
 def excel_to_csv(filename):
     '''read raw EXCEL file from raw_data directory and return a clean CSV file in the raw_data directory
@@ -10,7 +9,7 @@ def excel_to_csv(filename):
     '''
 
 
-    #path = f'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/{filename}.xlsx'
+    #absolute path = f'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/{filename}.xlsx'
     path = f'../raw_data/{filename}.xlsx'
     df=pd.read_excel(path)
 
@@ -45,7 +44,7 @@ def excel_to_csv(filename):
     df['Date']=np.where(df['Tranche Horaire']=='[03h à 04h[',df['Date']- pd.offsets.Day(1),df['Date'])
     #-----------------------------------------
 
-    #----------Drop Colonnes maintenant redondantes--------------
+    #----------Drop Colonnes maintenant redondantes et inexactes--------------
     df=df.drop(columns=['Année','Mois','Jour du mois'])
     #------------------------------------------
 
@@ -95,10 +94,18 @@ def excel_to_csv(filename):
 
 
     #----------------------------------------#----------------------------------------
-    #----------Drop PREMIERE LIGNE DE BOURSE-------------- #----------------------------------------
+    #----------MODIFICATIONS PROPRE A DarocoBourse-------------- #----------------------------------------
     if filename == 'CA_DarocoBourse':
-        df=df.sort_values(by='date')
-        df=df.iloc[1: , :]
+
+
+        #----------------------------------------#----------------------------------------
+        #----------CHhoix des BORNES de notre DATASET DAROCO Bourse-------------- -----------
+
+        # DEBUT 2019-01-01, FIN 2021-07-31
+        df = df[(df.index >= "2019-01-01 12:00:00") & (df.index <= "2021-07-31 18:00:00")]
+
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
 
 
         #----------------------------------------#----------------------------------------
@@ -128,11 +135,28 @@ def excel_to_csv(filename):
         #----------------------------------------#----------------------------------------
 
         #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES Restrictions COVID Daroco Bourse----------- #----------------------------------------
+
+        # DU 2020-03-14 au 2020-06-15 inclus
+        df=df.drop(df[(df.index > "2020-03-14 18:00:00") & (df.index < "2020-06-15 12:00:00")].index)
+
         #----------------------------------------#----------------------------------------
+        #--------------------------------------- #----------------------------------------
 
 
+
+    #----------------------------------------#----------------------------------------
+    #----------MODIFICATIONS PROPRE A DarocoXVI-------------- #----------------------------------------
     if filename == 'CA_DarocoXVI':
 
+        #----------------------------------------#----------------------------------------
+        #----------Choix des BORNES de notre DATASET DAROCO XVI-------------- -----------
+
+        # DEBUT 2019-09-01, FIN 2021-07-31
+        df = df[(df.index >= "2019-09-01 12:00:00") & (df.index <= "2021-07-31 18:00:00")]
+
+        #----------------------------------------#----------------------------------------
+        #----------------------------------------#----------------------------------------
 
         #----------------------------------------#----------------------------------------
         #----------Drop LIGNES DE MIDI DE XVI OUTLIERS-------------- #----------------------------------------
@@ -161,16 +185,25 @@ def excel_to_csv(filename):
         #----------------------------------------#----------------------------------------
         #----------------------------------------#----------------------------------------
 
+        #----------------------------------------#----------------------------------------
+        #----------Drop LIGNES Restrictions COVID Daroco XVI----------- #----------------------------------------
+        # DROP DU 2020-03-14 au 2020-06-06
+        df=df.drop(df[(df.index >= "2020-03-14 12:00:00") & (df.index <= "2020-06-06 18:00:00")].index)
+
+        # DROP DU 2021-05-19 au 2021-06-08
+        df=df.drop(df[(df.index >= "2021-05-19 12:00:00") & (df.index <= "2021-06-08 18:00:00")].index)
+        #----------------------------------------#----------------------------------------
+        #--------------------------------------- #----------------------------------------
 
 
 
-    #-------------------------Create CSV in RAW DATA------------------------------
+    #-------------------------Create CSV in RAW_DATA directory------------------------------
     if filename == 'CA_DarocoBourse':
-        df.to_csv(r'../raw_data/df_dBourse.csv',index=False)
+        df.to_csv(r'../raw_data/df_raw_d2.csv',index=False)
 
 
     if filename == 'CA_DarocoXVI':
-        df.to_csv(r'../raw_data/df_DXVI.csv', index=False)
+        df.to_csv(r'../raw_data/df_raw_d16.csv', index=False)
 
 
 
@@ -179,9 +212,6 @@ def excel_to_csv(filename):
 
 
 
-
-
-#Console TEST
 if __name__ == '__main__':
 
 
