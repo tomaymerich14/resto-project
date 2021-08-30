@@ -11,6 +11,11 @@ scikit-learn
 xgboost
 lightgbm
 
+# models
+xgboost
+lightgbm
+catboost
+
 # tests/linter
 black
 coverage

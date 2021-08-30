@@ -1,42 +1,67 @@
 from pandas.core.algorithms import mode
 from sklearn.linear_model import Ridge
 from sklearn.dummy import DummyRegressor
-from scipy import stats
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.compose import ColumnTransformer, make_column_transformer, make_column_selector
-from sklearn.impute import SimpleImputer, KNNImputer
-from sklearn.preprocessing import RobustScaler, OneHotEncoder, OrdinalEncoder
-from sklearn.metrics import make_scorer
-from sklearn.model_selection import cross_val_score
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.linear_model import Ridge, Lasso, LinearRegression
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.svm import SVR
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import VotingRegressor
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.ensemble import StackingRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.inspection import permutation_importance
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
+
 from tabnet import TabNetClassifier, TabNetRegression
 
+from tabnet import TabNetClassifier, TabNetRegressor
+from catboost import CatBoostRegressor
+
+model_name = 'XGB'
+max_depth = 4
+n_estimators = 40
+learning_rate = 0.1
+
+def get_params_values(max_depth, n_estimators, learning_rate):
+    params = f'max_depth = {max_depth}, n_estimators = {n_estimators}, learning_rate = {learning_rate}'
+    return params
+
+def get_params_names():
+    return 'max_depth', 'n_estimators', 'learning_rate'
+
+def get_model_names():
+    models = ['RIDGE', 'DUMMY', 'GBR', 'XGB', 'LGBM', 'CATB']
+    return models
+
+
 def model_selection(model_name):
-    if model_name == 'Ridge':
+    if model_name == 'RIDGE':
         model_test = Ridge()
-    if model_name == 'Dummy':
+
+    if model_name == 'DUMMY':
         model_test = DummyRegressor(strategy='mean')
-    if model_name == 'GradientBoostingRegressor':
-        model_test = GradientBoostingRegressor(n_estimators=200, verbose=0, max_depth=5, learning_rate=0.05)
-    if model_name == 'XGBRegressor':
-        model_test = XGBRegressor(max_depth=10, n_estimators=300, learning_rate=0.05)
-    if model_name == 'lightgbm':
-        model_test = LGBMRegressor()
+
+
+    if model_name == 'GBR':
+        model_test = GradientBoostingRegressor(max_depth=max_depth,
+                                               n_estimators=n_estimators,
+                                               learning_rate=learning_rate)
+
+    if model_name == 'XGB':
+        model_test = XGBRegressor(max_depth=max_depth,
+                                  n_estimators=n_estimators,
+                                  learning_rate=learning_rate)
+
+    if model_name == 'LGBM':
+        model_test = LGBMRegressor(max_depth=max_depth,
+                                   n_estimators=n_estimators,
+                                   learning_rate=learning_rate)
+
+    if model_name == 'CATB':
+        model_test = CatBoostRegressor(max_depth=max_depth,
+                                       n_estimators=n_estimators,
+                                       learning_rate=learning_rate)
+
     #if model_name == 'tabnet':
-        #model_test = TabNetRegression(num_regressors=100, feature_columns = )
+        #model_test = TabNetRegressor()
+
     return model_test
+
+
+if __name__ == '__main__':
+    get_model_names()
+    get_model_names()
+    model_selection()
