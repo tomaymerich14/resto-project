@@ -26,6 +26,7 @@ def daily_maes():
         prov_dict_d16[i]=daily_mae_d16.mean()
         prov_dict_d16[f'{i} std']=daily_mae_d16.std()
         prov_dict_d16[f'{i} % total']=prov_dict_d16[i]/CA_d16[i].mean()
+
     daily_maes_d2 = pd.DataFrame(data=prov_dict_d2, index=index_d2)
     daily_maes_d16 = pd.DataFrame(data=prov_dict_d16, index=index_d16)
     daily_maes = pd.concat([daily_maes_d2, daily_maes_d16])
