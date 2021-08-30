@@ -1,12 +1,13 @@
 from sklearn.model_selection import GridSearchCV, RepeatedKFold
+from sklearn.model_selection import cross_val_score
 from get_dataframe import get_XY, get_service
 from model import model_selection
 from sklearn.pipeline import make_pipeline
 from tempfile import mkdtemp
 import numpy as np
-from trainer import Trainer
 from numpy import mean
 from numpy import std
+from trainer import set_pipeline
 
 
 cachedir = mkdtemp()
@@ -18,7 +19,7 @@ def grid_search(df, jour, service):
 
     model = model_selection('XGB')
 
-    preproc = Trainer.set_pipeline(model)
+    preproc = set_pipeline(model)
 
     param_grid = {
         'xgbregressor__max_depth': np.arange(1, 5, 1),

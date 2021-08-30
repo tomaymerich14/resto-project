@@ -6,6 +6,10 @@ import mlflow
 from mlflow.tracking import MlflowClient
 from memoized_property import memoized_property
 
+#JOBLIB
+import joblib
+from termcolor import colored
+
 #SKLEARN
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
@@ -103,22 +107,21 @@ class Trainer():
         self.set_pipeline(model)
         self.pipeline.fit(self.X, self.y)
         self.mlflow_log_param(mlflow_params_name_1, mlflow_params_value_1)
+        self.mlflow_log_param(mlflow_params_name_2, mlflow_params_value_2)
 
     def evaluate(self, X, y):
         pipe = self.pipeline
-        mae = cross_val_score(pipe,
-                              X,
-                              y,
-                              cv=20,
-                              scoring='neg_mean_absolute_error').mean()
+        y_pred = cross_val_score(pipe, X, y, cv=5, scoring='neg_mean_absolute_error', n_jobs=-1)
+        mae = np.mean(y_pred)
+        std = np.std(y_pred)
         self.mlflow_log_metric('mae', mae)
-        mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
-
-
-        y_pred = cross_val_predict(pipe, X, y, cv=20)
-        #self.mlflow_log_metric('r2_score', r2_score)
-        self.mlflow_log_metric('mae', mae)
+        self.mlflow_log_metric('std', std)
         return y_pred
+
+    def save_model_locally(self):
+        """Save the model into a .joblib format"""
+        joblib.dump(self.pipeline, 'model.joblib')
+        print(colored("model.joblib saved locally", "green"))
 
     # MLFlow methods
     @memoized_property
@@ -158,37 +161,35 @@ if __name__ == "__main__":
     X_d16 = get_XY(preproc_data_d16)[0]
     y_d16 = get_XY(preproc_data_d16)[1]
 
+
     ###CHOOSE THE DATASET###
     test_D2 = True
     test_D16 = True
 
     ###CHOOSE THE MODEL ###
-    from model import get_model_names
     from model import model_selection
 
     # go to model.py
 
-    model_name = 'XGB'
-    ### -> possible models =
-    # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
-    
-    model_name = get_model_names()[3]
-
     ###CHOOSE PARAMS###
+    model_name = 'XGB'
     max_depth = 4
-    n_estimators = 40
+    n_estimators = 200
     learning_rate = 0.1
 
     model_test = model_selection(model_name)
 
 
     ###GRIDSEARCH###
-    allow_grid_search = False
+    allow_grid_search = False #not working yet
 
     ###CHOOSE MLF PARAMS###
     from mlflow_params import get_params
+
     mlflow_params_name_1 = get_params(model_name)[0]
     mlflow_params_value_1 = get_params(model_name)[1]
+    mlflow_params_name_2 = get_params(model_name)[2]
+    mlflow_params_value_2 = get_params(model_name)[3]
 
     if test_D2 == True:
         resto_name = 'D2'
