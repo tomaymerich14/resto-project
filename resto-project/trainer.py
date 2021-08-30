@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
 
     ### -> possible models = 'Ridge', 'Dummy'
-    model_name = 'lightgbm'
+    model_name = 'tabnet'
     ### -> possible models =
     # 'Ridge', 'Dummy', 'XGBRegressor','GradientBoostingRegressor'
     model_test = model_selection(model_name)
