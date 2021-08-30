@@ -20,9 +20,11 @@ def daily_maes():
         daily_mae_d16 = np.abs(daily_series_d16['y_true']-daily_series_d16['y_pred'])
 
         prov_dict_d2[i]=daily_mae_d2.mean()
+        prov_dict_d2[f'{i} std']=daily_mae_d2.std()
         prov_dict_d2[f'{i} % total']=prov_dict_d2[i]/CA_d2[i].mean()
 
         prov_dict_d16[i]=daily_mae_d16.mean()
+        prov_dict_d16[f'{i} std']=daily_mae_d16.std()
         prov_dict_d16[f'{i} % total']=prov_dict_d16[i]/CA_d16[i].mean()
     daily_maes_d2 = pd.DataFrame(data=prov_dict_d2, index=index_d2)
     daily_maes_d16 = pd.DataFrame(data=prov_dict_d16, index=index_d16)
@@ -42,8 +44,11 @@ def service_maes():
         service_mae_d16 = np.abs(service_series_d16['y_true']-service_series_d16['y_pred'])
 
         prov_dict_d2[i]=service_mae_d2.mean()
+        prov_dict_d2[f'{i} std']=service_mae_d2.std()
         prov_dict_d2[f'{i} % total']=prov_dict_d2[i]/CA_d2[i].mean()
+
         prov_dict_d16[i]=service_mae_d16.mean()
+        prov_dict_d16[f'{i} std']=service_mae_d16.std()
         prov_dict_d16[f'{i} % total']=prov_dict_d16[i]/CA_d16[i].mean()
 
     service_maes_d2 = pd.DataFrame(data=prov_dict_d2, index=index_d2)
@@ -65,8 +70,11 @@ def daily_service_maes():
             daily_service_mae_d16 = np.abs(daily_service_series_d16['y_true']-daily_service_series_d16['y_pred'])
 
             prov_dict_d2[f'{i} {y}']=daily_service_mae_d2.mean()
+            prov_dict_d2[f'{i} {y} std']=daily_service_mae_d2.std()
             prov_dict_d2[f'{i} {y} % total'] = prov_dict_d2[concat]/CA_d2[concat].mean()
+
             prov_dict_d16[f'{i} {y}']=daily_service_mae_d16.mean()
+            prov_dict_d16[f'{i} {y} std']=daily_service_mae_d16.std()
             prov_dict_d16[f'{i} {y} % total'] = prov_dict_d16[concat]/CA_d16[concat].mean()
 
     daily_service_maes_d2 = pd.DataFrame(data=prov_dict_d2, index=index_d2)
