@@ -6,6 +6,7 @@ n_estimators = 40
 learning_rate = 0.1
 
 def get_params(model_name):
+
     if model_name == 'RIDGE':
         mlflow_params_name_1 = get_model_names()[0]
         mlflow_params_value_1 = get_params_values(max_depth, n_estimators, learning_rate)
@@ -35,4 +36,5 @@ def get_params(model_name):
        #mlflow_params_value_1 = 'all'
 
    
+
     return mlflow_params_name_1, mlflow_params_value_1
