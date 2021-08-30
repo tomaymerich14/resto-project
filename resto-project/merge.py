@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from cyclical import cyclical_columns
 def merge():
 
