@@ -30,4 +30,9 @@ def get_params(model_name):
         mlflow_params_value_1 = get_params_values(max_depth, n_estimators,
                                                   learning_rate)
 
+    #if model_name == 'tabnet':
+       #mlflow_params_name_1 = 'all_params'
+       #mlflow_params_value_1 = 'all'
+
+   
     return mlflow_params_name_1, mlflow_params_value_1

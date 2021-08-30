@@ -4,6 +4,7 @@ from sklearn.dummy import DummyRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
+from tabnet import TabNetClassifier, TabNetRegressor
 from catboost import CatBoostRegressor
 
 model_name = 'XGB'
@@ -48,6 +49,9 @@ def model_selection(model_name):
         model_test = CatBoostRegressor(max_depth=max_depth,
                                        n_estimators=n_estimators,
                                        learning_rate=learning_rate)
+
+    #if model_name == 'tabnet':
+        #model_test = TabNetRegressor()
 
     return model_test
 

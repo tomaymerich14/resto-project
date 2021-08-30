@@ -168,9 +168,10 @@ if __name__ == "__main__":
 
     # go to model.py
 
-
+    model_name = 'XGB'
     ### -> possible models =
     # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
+    
     model_name = get_model_names()[3]
 
     ###CHOOSE PARAMS###
