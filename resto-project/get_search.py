@@ -47,4 +47,5 @@ def grid_search(df, jour, service):
                                n_jobs=-1)
     print(search_pipe_xgb.best_params_), print('MAE: %.3f (%.3f)' %
                                                (mean(n_scores), std(n_scores)))
+
     return search_pipe_xgb.best_estimator_, search_pipe_xgb.best_params_, search_pipe_xgb.best_score_

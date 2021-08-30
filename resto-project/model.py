@@ -6,11 +6,9 @@ from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
 #from tabnet import TabNetClassifier, TabNetRegressor
 from catboost import CatBoostRegressor
+from __main__ import max_depth, n_estimators, learning_rate, model_name
 
-model_name = 'XGB'
-max_depth = 4
-n_estimators = 200
-learning_rate = 0.05
+model_name = model_name
 
 def get_params_values(max_depth, n_estimators, learning_rate):
     params = f'max_depth = {max_depth}, n_estimators = {n_estimators}, learning_rate = {learning_rate}'

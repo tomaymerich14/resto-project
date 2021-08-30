@@ -7,7 +7,8 @@ from tempfile import mkdtemp
 
 cachedir = mkdtemp()
 
-df = trainer.preproc_data_d2
+###NOT WORKING!###
+df = 'preproc_data_d2'
 jour = 'Lundi'
 service = 'midi'
 model_name = 'XGB'
@@ -29,7 +30,7 @@ def grid_search(df, jour, service, model_name, param_grid):
 
     model = model_name
 
-    preproc = trainer.set_pipeline(model)
+    preproc = set_pipeline(model)
 
     pipe_xgb = make_pipeline(preproc, model, memory=cachedir)
 

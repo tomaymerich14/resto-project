@@ -1,6 +1,9 @@
-#enter df = X_d16, X_d2
-#enter jour = 'Lundi', 'Mardi' , ...
-#enter service = 'soir, 'midi'
+from __main__ import max_depth, n_estimators, learning_rate, model_name
+from __main__ import jour, service
+
+model_name = model_name
+
+
 def get_service(df, jour, service):
     df_jour = df[df['jour'] == jour]
     df_service = df_jour[df_jour['service'] == service]
