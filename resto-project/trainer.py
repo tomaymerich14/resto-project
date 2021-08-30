@@ -8,6 +8,7 @@ from memoized_property import memoized_property
 
 #SKLEARN
 from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_predict
 from sklearn.pipeline import make_pipeline
 from sklearn.compose import make_column_transformer
 from sklearn.impute import SimpleImputer, KNNImputer
@@ -29,36 +30,17 @@ class Trainer():
         # for MLFlow
         self.experiment_name = f"[FRA][PARIS][655] Resto_Project_{resto_name}"
 
-    def set_params(max_depth, n_estimators, learning_rate):
-        max_depth = max_depth
-        n_estimators = n_estimators
-        learning_rate = learning_rate
-        return max_depth, n_estimators, learning_rate
-
     def set_pipeline(self, model):
         # set features
         feat_ordinal_dict = {
             'clear': ['0', 0, 'sky is clear'],
-            'clouds': [
-                '0', 0, 'scattered clouds', 'few clouds', 'broken clouds',
-                'overcast clouds'
-            ],
-            'drizzle': [
-                '0', 0, 'light intensity drizzle', 'drizzle',
-                'heavy intensity drizzle'
-            ],
-            'drizzle_and_rain':
-            ['0', 0, 'light intensity drizzle rain', 'rain and drizzle'],
+            'clouds': ['0', 0, 'scattered clouds', 'few clouds', 'broken clouds','overcast clouds'],
+            'drizzle': ['0', 0, 'light intensity drizzle', 'drizzle','heavy intensity drizzle'],
+            'drizzle_and_rain':['0', 0, 'light intensity drizzle rain', 'rain and drizzle'],
             'fog': ['0', 0, 'fog'],
             'mist': ['0', 0, 'mist'],
-            'rain': [
-                '0', 0, 'light rain', 'light intensity shower rain',
-                'moderate rain', 'heavy intensity rain'
-            ],
-            'thunderstorm': [
-                '0', 0, 'proximity thunderstorm', 'thunderstorm',
-                'thunderstorm with light rain', 'thunderstorm with heavy rain'
-            ]
+            'rain': ['0', 0, 'light rain', 'light intensity shower rain','moderate rain', 'heavy intensity rain'],
+            'thunderstorm': ['0', 0, 'proximity thunderstorm', 'thunderstorm','thunderstorm with light rain', 'thunderstorm with heavy rain']
         }
 
         feat_ordinal = sorted(feat_ordinal_dict.keys())  # sort alphabetically
@@ -130,6 +112,13 @@ class Trainer():
                               cv=20,
                               scoring='neg_mean_absolute_error').mean()
         self.mlflow_log_metric('mae', mae)
+        mae = cross_val_score(pipe, X, y, cv=20, scoring='neg_mean_absolute_error').mean()
+
+
+        y_pred = cross_val_predict(pipe, X, y, cv=20)
+        #self.mlflow_log_metric('r2_score', r2_score)
+        self.mlflow_log_metric('mae', mae)
+        return y_pred
 
     # MLFlow methods
     @memoized_property
@@ -186,7 +175,6 @@ if __name__ == "__main__":
     learning_rate = 0.1
 
     model_test = model_selection(model_name, *max_depth, *n_estimators, *learning_rate)
-
 
 
     ###GRIDSEARCH###
