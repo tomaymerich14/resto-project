@@ -4,7 +4,6 @@ from model import model_selection
 from sklearn.pipeline import make_pipeline
 from tempfile import mkdtemp
 import numpy as np
-from trainer import Trainer
 from numpy import mean
 from numpy import std
 

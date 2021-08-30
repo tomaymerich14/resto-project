@@ -3,6 +3,7 @@ set_d2 = pd.read_csv('../raw_data/df_feat_d2.csv')
 set_d16= pd.read_csv('../raw_data/df_feat_d16.csv')
 index_d2 = ['Daroco Bourse']
 index_d16 = ['Daroco 16']
+
 def actual_chiffres():
     prov_actual_dict_d2 = {}
     prov_actual_dict_d16 = {}

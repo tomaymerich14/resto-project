@@ -4,7 +4,6 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import GridSearchCV
 import numpy as np
 from tempfile import mkdtemp
-import trainer
 
 cachedir = mkdtemp()
 
@@ -44,3 +43,7 @@ def grid_search(df, jour, service, model_name, param_grid):
     search_pipe.fit(X, y)
 
     return search_pipe.best_estimator_, search_pipe.best_params_, search_pipe.best_score_
+
+
+if __name__ == '__main__':
+    grid_search()
