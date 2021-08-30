@@ -169,6 +169,11 @@ if __name__ == "__main__":
     # go to model.py
 
 
+<<<<<<< HEAD
+=======
+    ### -> possible models = 'Ridge', 'Dummy'
+    model_name = 'tabnet'
+>>>>>>> 00ba87c333c001bd2c9114d85492a6b1453e1a2f
     ### -> possible models =
     # 0:'RIDGE', 1:'DUMMY', 2:'GBR', 3:'XGB', 4:'LGBM', 5:'CATB'
     model_name = get_model_names()[3]
