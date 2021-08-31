@@ -22,8 +22,12 @@ app.add_middleware(
 ###INSERT REQUEST###
 
 ###GET RAW DATA###
+request_data_d2 = #pd.read_csv('../raw_data/preproc_data_d2.csv')
+request_data_d16 = #pd.read_csv('../raw_data/preproc_data_d16.csv')
 
 ####TRANSFORM RAW DATA###
+
+
 
 ###GET PREDICT
 
