@@ -32,7 +32,7 @@ def merge():
     df_d2['match_happening'] = df_d2['Match Happening'].copy()
     df_d2['match_happening_cl'] = df_d2['Match Happening-CL'].copy()
     df_d2.drop(columns=['Match Happening', 'Match Happening-CL'],inplace=True)
-    df_d2.fillna(value=0, inplace=True)
+    df_d2.fillna(value=0.0, inplace=True)
 
     # Reset index
     df_d2 = df_d2.reset_index(drop=True)
@@ -51,12 +51,12 @@ def merge():
     df_d16 = df_d16.drop_duplicates(subset=['date', 'service'], keep='first')
     df_d16.drop(columns=['CA_HT', 'TVA'], inplace=True)
     df_d16.drop(columns=['Location', 'Home Team','Away Team'], inplace=True)
-    df_d16['Match Happening'].replace(to_replace=0.0,value=1,inplace=True)
-    df_d16['Match Happening-CL'].replace(to_replace=0.0,value=1,inplace=True)
+    df_d16['Match Happening'].replace(to_replace=0.0,value=1.0,inplace=True)
+    df_d16['Match Happening-CL'].replace(to_replace=0.0,value=1.0,inplace=True)
     df_d16['match_happening'] = df_d16['Match Happening'].copy()
     df_d16['match_happening_cl'] = df_d16['Match Happening-CL'].copy()
     df_d16.drop(columns=['Match Happening', 'Match Happening-CL'], inplace=True)
-    df_d16.fillna(value=0,inplace=True)
+    df_d16.fillna(value=0.0,inplace=True)
 
     df_d16 = df_d16.reset_index(drop=True)
 
