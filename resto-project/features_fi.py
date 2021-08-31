@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
-from statistics import mean
+from numpy import mean
+from numpy import std
 
 #----------------------------------------
 def features_fi():

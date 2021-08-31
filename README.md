@@ -4,7 +4,6 @@
 - Data Source:
 - Type of analysis:
 
-Please document the project the better you can.
 
 # Startup the project
 
