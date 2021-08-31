@@ -2,7 +2,6 @@ from os import pathconf
 import pandas as pd
 import numpy as np
 
-#'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/CA_DarocoBourse.xlsx'
 
 def excel_to_csv(filename):
     '''read raw EXCEL file from raw_data directory and return a clean CSV file in the raw_data directory
@@ -10,7 +9,7 @@ def excel_to_csv(filename):
     '''
 
 
-    #path = f'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/{filename}.xlsx'
+    #absolute path = f'/Users/guillaume/code/tomaymerich14/resto-project/raw_data/{filename}.xlsx'
     path = f'../raw_data/{filename}.xlsx'
     df=pd.read_excel(path)
 
@@ -45,7 +44,7 @@ def excel_to_csv(filename):
     df['Date']=np.where(df['Tranche Horaire']=='[03h à 04h[',df['Date']- pd.offsets.Day(1),df['Date'])
     #-----------------------------------------
 
-    #----------Drop Colonnes maintenant redondantes--------------
+    #----------Drop Colonnes maintenant redondantes et inexactes--------------
     df=df.drop(columns=['Année','Mois','Jour du mois'])
     #------------------------------------------
 
@@ -151,7 +150,7 @@ def excel_to_csv(filename):
     if filename == 'CA_DarocoXVI':
 
         #----------------------------------------#----------------------------------------
-        #----------CHhoix des BORNES de notre DATASET DAROCO XVI-------------- -----------
+        #----------Choix des BORNES de notre DATASET DAROCO XVI-------------- -----------
 
         # DEBUT 2019-09-01, FIN 2021-07-31
         df = df[(df.index >= "2019-09-01 12:00:00") & (df.index <= "2021-07-31 18:00:00")]
@@ -198,7 +197,7 @@ def excel_to_csv(filename):
 
 
 
-    #-------------------------Create CSV in RAW DATA------------------------------
+    #-------------------------Create CSV in RAW_DATA directory------------------------------
     if filename == 'CA_DarocoBourse':
         df.to_csv(r'../raw_data/df_raw_d2.csv',index=False)
 
@@ -213,9 +212,6 @@ def excel_to_csv(filename):
 
 
 
-
-
-#Console TEST
 if __name__ == '__main__':
 
 
