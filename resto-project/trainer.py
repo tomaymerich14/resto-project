@@ -121,9 +121,9 @@ class Trainer():
         self.mlflow_log_metric('std', std)
         return y_pred
 
-    def save_model_locally(self):
+    def save_model_locally(self,path):
         """Save the model into a .joblib format"""
-        joblib.dump(self.pipeline, 'model.joblib')
+        joblib.dump(self.pipeline, path)
         print(colored("model.joblib saved locally", "green"))
 
     # MLFlow methods
@@ -154,6 +154,7 @@ class Trainer():
 
 if __name__ == "__main__":
 
+
     preproc_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
     preproc_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
 
@@ -169,6 +170,9 @@ if __name__ == "__main__":
     ### DAROCO 16
     X_d16 = get_XY(preproc_data_d16)[0]
     y_d16 = get_XY(preproc_data_d16)[1]
+
+    t_d2 = Trainer(X_d2, y_d2, 'D2')
+
 
 
     ###CHOOSE THE DATASET###
@@ -211,16 +215,14 @@ if __name__ == "__main__":
         train_d2 = Trainer(X_d2, y_d2, resto_name)
         train_d2.run(model=model_test_D2)
         train_d2.evaluate(X_d2, y_d2)
-        #save_model_locally()
-        #storage_upload()
+        train_d2.save_model_locally('../raw_data/model_d2.joblib')
 
     if test_D16 == True:
         resto_name = 'D16'
         train_d16 = Trainer(X_d16, y_d16, resto_name)
         train_d16.run(model=model_test_D16)
         train_d16.evaluate(X_d16, y_d16)
-        #trainer.save_model_locally()
-        #storage_upload()
+        train_d16.save_model_locally('../raw_data/model_d16.joblib')
 
 
 
