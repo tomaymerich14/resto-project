@@ -1,8 +1,6 @@
 from datetime import datetime
 import pandas as pd
 import joblib
-#from Resto_Project_D2.predict import download_model_D2
-#from Resto_Project_D2.predict import download_model_D16
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -24,9 +22,11 @@ model_path = os.path.relpath(os.path.join(
     os.path.dirname(__file__),
     "..",
     "joblibs"))
-pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
-pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
+#pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
+#pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
 
+pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../raw_data/model_d2_CO.joblib'))
+pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../raw_data/model_d16_CO.joblib'))
 ###GET RAW DATA###
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
@@ -69,6 +69,7 @@ def create_fare():
     results_d2 = pipeline_d2.predict(request_data_d2)
     #D16
     results_d16 = pipeline_d16.predict(request_data_d16)
+
 
     # convert response from numpy to python type
     pred_d2 = results_d2.tolist()
