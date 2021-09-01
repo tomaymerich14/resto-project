@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import numpy as np
+import datetime as dt
 
 def historical_data(path):
     historical_data = pd.read_csv('../raw_data/448f97988afe977af36cfc73cde95211.csv')
@@ -25,7 +26,10 @@ def historical_data(path):
     return historical_services
     #historical_services.to_csv('Historical-services.csv', index=False)
 
-def fetch_data_api(api,city,nodays):
+def jour_annee(x):
+    return x.toordinal() - dt.date(x.year, 1, 1).toordinal() + 1
+
+def fetch_data_api(api, city, nodays):
     """
     Get weather data from weather API. Returns empty string if data not found'
 
@@ -41,25 +45,28 @@ def fetch_data_api(api,city,nodays):
         return ''
     data = response.json()
 
-    return data['forecast']['forecastday']
+    data = data['forecast']['forecastday']
+    return data
 
 def process_api_forecast():
-    data = fetch_data_api('09e033659f124258acf74721212408','Paris','3')
+    data = fetch_data_api('ff3e7f86602e4b0bb4e82520210109','Paris','7')
+    exo_data = pd.read_csv('../exo_data/events_exo_pred.csv')
     daily_data = pd.DataFrame(data[0]['day']).iloc[2,:]
     ### gives the weather hour by hour for the entire first day###
 
     daily_hourly_data = pd.DataFrame(data[0]['hour'])
     #condition has a code and an image, the code below only keeps the needed weather state
     for i in range(len(daily_hourly_data)):
-        daily_hourly_data['condition'][i]=daily_hourly_data['condition'][i]['text']
+        interm = daily_hourly_data['condition'][i]['text']
+        daily_hourly_data['condition'][i]=interm
 
     #condition is given as three values this keeps only one
     data_series=[]
-    for i in range(3):
+    for i in range(7):
         data_series.append(data[i]['hour'])
 
     #condition has a code and an image, the code below only keeps the needed weather state
-    for x in range(3):
+    for x in range(7):
         for y in range(24):
             data_series[x][y]['condition']=data_series[x][y]['condition']['text']
 
@@ -73,35 +80,67 @@ def process_api_forecast():
     seven_day_forecast['time']=pd.to_datetime(seven_day_forecast['time'])
 
     #change conditions for a more simple range of possible values
-    Clear = ['Clear', 'Sunny']
-    Clouds = ['Clouds','Partly cloudy', 'Cloudy', 'Overcast']
-    Rain = ['Rain','Patchy rain possible', 'Patchy light rain', 'Light rain', 'Moderate rain at times','Moderate rain','Heavy rain at times','Heavy rain','Moderate or heavy rain shower','Torrential rain shower']
-    Mist = ['Mist']
-    Drizzle = ['Drizzle','Patchy light drizzle','Light drizzle','Freezing drizzle','Heavy freezing drizzle','Light rain shower']
-    Fog = ['Fog', 'Freezing Fog']
-    Snow = ['Snow','Patchy snow possible', 'Patchy sleet possible', 'Patchy freezing drizzle possible', 'Blowing snow','Blizzard','Moderate or heavy freezing rain','Light freezing rain','Light sleet', 'Moderate or heavy sleet','Patchy light snow','Light snow','Patchy moderate snow','Moderate snow','Patchy heavy snow','Heavy snow','Ice pellets','Light sleet showers', 'Moderate or heavy sleet showers','Light snow showers','Moderate or heavy snow showers','Light showers of ice pellets','Moderate or heavy showers of ice pellets']
-    Thunderstorm = ['Thunderstorm','Thundery outbreaks possible', 'Patchy light rain with thunder','Moderate or heavy rain with thunder','Patchy light snow with thunder','Moderate or heavy snow with thunder']
-    Haze = ['Haze']
+    clear = ['Clear', 'Sunny']
+    clouds = ['Clouds','Partly cloudy', 'Cloudy', 'Overcast']
+    rain = ['Rain','Patchy rain possible', 'Patchy light rain', 'Light rain', 'Moderate rain at times','Moderate rain','Heavy rain at times','Heavy rain','Moderate or heavy rain shower','Torrential rain shower']
+    mist = ['Mist']
+    drizzle = ['Drizzle','Patchy light drizzle','Light drizzle','Freezing drizzle','Heavy freezing drizzle','Light rain shower']
+    fog = ['Fog', 'Freezing Fog']
+    snow = ['Snow','Patchy snow possible', 'Patchy sleet possible', 'Patchy freezing drizzle possible', 'Blowing snow','Blizzard','Moderate or heavy freezing rain','Light freezing rain','Light sleet', 'Moderate or heavy sleet','Patchy light snow','Light snow','Patchy moderate snow','Moderate snow','Patchy heavy snow','Heavy snow','Ice pellets','Light sleet showers', 'Moderate or heavy sleet showers','Light snow showers','Moderate or heavy snow showers','Light showers of ice pellets','Moderate or heavy showers of ice pellets']
+    thunderstorm = ['Thunderstorm','Thundery outbreaks possible', 'Patchy light rain with thunder','Moderate or heavy rain with thunder','Patchy light snow with thunder','Moderate or heavy snow with thunder']
+    haze = ['Haze']
 
-    summed_conditions = [Clear, Clouds, Rain, Mist, Drizzle, Fog, Snow, Thunderstorm, Haze]
-
+    summed_conditions = [clear, clouds, rain, mist, drizzle, fog, snow, thunderstorm, haze]
+    seven_day_forecast=seven_day_forecast.reset_index()
     for i in range(len(seven_day_forecast['condition'])):
         for x in summed_conditions:
             if seven_day_forecast['condition'][i] in x:
-                seven_day_forecast['condition'][i]=x[0]
+                seven_day_forecast['condition'][i] = x[0]
+
 
     lunch = seven_day_forecast[seven_day_forecast['time'].dt.hour==12]
-    lunch['Service']='Lunch'
+    lunch['service']='midi'
     dinner = seven_day_forecast[seven_day_forecast['time'].dt.hour==18]
-    dinner['Service']='Dinner'
+    dinner['service']='soir'
 
     forecasted_services = pd.concat([lunch, dinner])
     forecasted_services['time'] = forecasted_services['time'].dt.date
 
     forecasted_services=forecasted_services.set_index('time')
     forecasted_services = forecasted_services.sort_values('time')
-
-    return forecasted_services
+    forecasted_services = forecasted_services[['index','temp_c','condition','wind_kph','feelslike_c', 'service']]
+    forecasted_services=forecasted_services.reset_index().rename(columns={'time':'date'}).drop(columns='index')
+    print(forecasted_services)
+    forecasted_services=forecasted_services.rename(columns={'feelslike_c':'feels_like','temp_c':'temp', 'wind_kph':'wind_speed'}, errors = 'raise')
+    forecasted_services['date'] = pd.to_datetime(forecasted_services['date'],  format='%Y-%m-%d')
+    forecasted_services['jour_de_sem'] = forecasted_services['date'].dt.weekday +1
+    forecasted_services['jour_du_mois'] = forecasted_services['date'].dt.day
+    forecasted_services['mois_de_annee'] = forecasted_services['date'].dt.month
+    forecasted_services['sem_de_annee'] = forecasted_services['date'].dt.week
+    forecasted_services['jour_annee'] = forecasted_services.apply(lambda x:jour_annee(x['date']), axis=1)
+    forecasted_services['temp_min'] = forecasted_services['temp'] - 1
+    forecasted_services['temp_max'] = forecasted_services['temp'] + 1
+    forecasted_services['clouds_all'] = 0
+    forecasted_services['moyen_7_services'] = 0
+    forecasted_services['moyen_31_services'] = 0
+    forecasted_services['moyenne_3der_j&service'] = 0
+    forecasted_services['vacances_paris'] = 0
+    forecasted_services['condition'] = forecasted_services['condition'].str.lower()
+    table = pd.get_dummies(forecasted_services['condition'])
+    forecasted_services = pd.merge(forecasted_services, table, left_index=True, right_index=True).drop(columns='condition')
+    forecasted_services['jour']= forecasted_services['date'].dt.strftime('%A')
+    for i in range(len(forecasted_services)):
+        if forecasted_services['clouds'][i]==1:
+            forecasted_services['clouds_all'][i] = 50
+        if forecasted_services['rain'][i]==1:
+            forecasted_services['rain'][i] = 80
+        #if forecasted_services['thunderstorm']:
+            #if forecasted_services['thunderstorm'][i]==1:
+                #forecasted_services['thunderstorm'][i] = 80
+    exo_data['date']=pd.to_datetime(exo_data['date'])
+    forecasted_services = forecasted_services.merge(exo_data, how='left', left_on=['date','service'], right_on=['date','service'])
+    forecasted_services['jour'] = forecasted_services['jour'].map({'Monday':'Lundi','Tuesday':'Mardi', 'Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'})
+    forecasted_services.to_csv('../raw_data/forecasted_services.csv')
 
 def PSG_Matches():
     championsl_2017=pd.read_csv('../raw_data/Fixtures/champions-league-2017-paris-saint-germain-CentralEuropeanStandardTime.csv')
@@ -177,3 +216,8 @@ def PSG_Matches():
     return all_matches_ligue1, all_matches_championsleague
 #all_matches_ligue1.to_csv('PSG-Matches-Ligue1.csv',index=False)
 #all_matches_championsleague.to_csv('PSG-Matches-CL.csv',index=False)
+
+
+if __name__ == '__main__':
+    #fetch_data_api()
+    process_api_forecast()
