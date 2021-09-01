@@ -3,9 +3,9 @@ from sklearn.linear_model import Ridge
 from sklearn.dummy import DummyRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from xgboost import XGBRegressor
-from lightgbm import LGBMRegressor
+#from lightgbm import LGBMRegressor
 #from tabnet import TabNetClassifier, TabNetRegressor
-from catboost import CatBoostRegressor
+#from catboost import CatBoostRegressor
 from __main__ import max_depth, n_estimators, learning_rate, model_name
 
 model_name = model_name
@@ -38,15 +38,15 @@ def model_selection(model_name):
                                   n_estimators=n_estimators,
                                   learning_rate=learning_rate)
 
-    if model_name == 'LGBM':
-        model_test = LGBMRegressor(max_depth=max_depth,
-                                   n_estimators=n_estimators,
-                                   learning_rate=learning_rate)
+    #if model_name == 'LGBM':
+    #    model_test = LGBMRegressor(max_depth=max_depth,
+    #                               n_estimators=n_estimators,
+    #                               learning_rate=learning_rate)
 
-    if model_name == 'CATB':
-        model_test = CatBoostRegressor(max_depth=max_depth,
-                                       n_estimators=n_estimators,
-                                       learning_rate=learning_rate)
+    #if model_name == 'CATB':
+    #    model_test = CatBoostRegressor(max_depth=max_depth,
+    #                                   n_estimators=n_estimators,
+    #                                   learning_rate=learning_rate)
 
 
     #if model_name == 'tabnet':
