@@ -31,8 +31,8 @@ pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
 
-request_data_d2 = pd.read_csv(os.path.join(data_path, 'preproc_data_d2.csv'))
-request_data_d16 = pd.read_csv(os.path.join(data_path, 'preproc_data_d16.csv'))
+request_data_d2 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d2.csv'))
+request_data_d16 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d16.csv'))
 
 #request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
 #request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
