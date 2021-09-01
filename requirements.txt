@@ -11,8 +11,8 @@ scikit-learn
 
 # models
 xgboost
-lightgbm
-catboost
+#lightgbm
+#catboost
 
 # tests/linter
 black
