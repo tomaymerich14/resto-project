@@ -34,9 +34,6 @@ data_path = os.path.relpath(
 request_data_d2 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d2.csv'))
 request_data_d16 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d16.csv'))
 
-#request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
-#request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
-
 ####TRANSFORM RAW DATA###
 # -> already done mannualy
 
@@ -46,17 +43,32 @@ def index():
     return {"Welcome to": "Resto Project"}
 
 
+@app.post("/uploadfile")
+async def create_upload_file(file: bytes = File(...)):
+
+    # print("\nreceived file:")
+    # print(type(file))
+    # print(file)
+
+    image_path = "image_api.png"
+
+    # write file to disk
+    with open(image_path, "wb") as f:
+        f.write(file)
+
+    # model -> pred
+
+    return dict(pred=True)
+
+
 @app.get("/predict")
 def create_fare():
 
-
     # make prediction
-    #J1
-    results_d2 = pipeline_d2.predict(request_data_d2.iloc[0:14])
-    #J2
-    #J3
-    #J4
-    results_d16 = pipeline_d16.predict(request_data_d16.iloc[0:14])
+    #D2
+    results_d2 = pipeline_d2.predict(request_data_d2)
+    #D16
+    results_d16 = pipeline_d16.predict(request_data_d16)
 
     # convert response from numpy to python type
     pred_d2 = results_d2.tolist()
