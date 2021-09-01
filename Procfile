@@ -1,1 +1,1 @@
-web: pip install . -U &&  resto-project-655-run
+web: pip install . -U && cd resto_project && uvicorn api_test:app
