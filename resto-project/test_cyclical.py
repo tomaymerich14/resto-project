@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 
 def cyclical_columns():
+    b = pd.read_csv('../raw_data/preproc_data_d2.csv')
+    b = b.drop(columns='CA_TTC')
+    cols=list(b.columns)
+
     for i in [2,16]:
         forecast_set = f'../raw_data/forecasted_services_d{i}.csv'
 
@@ -35,7 +39,6 @@ def cyclical_columns():
 
 
         forecast_set_all.drop(columns=['semaine_annee_norm','jour_annee_norm','mois_de_annee_norm','jour_du_mois_norm','jour_de_sem_norm','jour_de_sem','jour_du_mois','mois_de_annee','sem_de_annee','jour_annee','Unnamed: 0'], inplace=True)
-
         forecast_set_all.to_csv(f'../raw_data/forecasted_services_d{i}.csv',index=False)
 
         pass

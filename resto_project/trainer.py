@@ -13,7 +13,7 @@ from termcolor import colored
 #SKLEARN
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import make_pipeline, Pipeline
 from sklearn.compose import make_column_transformer
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
@@ -103,7 +103,8 @@ class Trainer():
             remainder="drop")
 
         #set pipe
-        self.pipeline = make_pipeline(preproc, model)
+        self.pipeline = Pipeline(steps=[('preproc',preproc),
+                                 ('model', model)])
 
     def run(self, model):
         self.set_pipeline(model)
