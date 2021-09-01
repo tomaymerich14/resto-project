@@ -49,7 +49,8 @@ def fetch_data_api(api, city, nodays):
     return data
 
 def process_api_forecast():
-    data = fetch_data_api('09e033659f124258acf74721212408','Paris','3')
+    data = fetch_data_api('ff3e7f86602e4b0bb4e82520210109','Paris','7')
+    exo_data = pd.read_csv('../exo_data/events_exo_pred.csv')
     daily_data = pd.DataFrame(data[0]['day']).iloc[2,:]
     ### gives the weather hour by hour for the entire first day###
 
@@ -61,11 +62,11 @@ def process_api_forecast():
 
     #condition is given as three values this keeps only one
     data_series=[]
-    for i in range(3):
+    for i in range(7):
         data_series.append(data[i]['hour'])
 
     #condition has a code and an image, the code below only keeps the needed weather state
-    for x in range(3):
+    for x in range(7):
         for y in range(24):
             data_series[x][y]['condition']=data_series[x][y]['condition']['text']
 
@@ -98,9 +99,9 @@ def process_api_forecast():
 
 
     lunch = seven_day_forecast[seven_day_forecast['time'].dt.hour==12]
-    lunch['service']='Lunch'
+    lunch['service']='midi'
     dinner = seven_day_forecast[seven_day_forecast['time'].dt.hour==18]
-    dinner['service']='Dinner'
+    dinner['service']='soir'
 
     forecasted_services = pd.concat([lunch, dinner])
     forecasted_services['time'] = forecasted_services['time'].dt.date
@@ -117,22 +118,28 @@ def process_api_forecast():
     forecasted_services['mois_de_annee'] = forecasted_services['date'].dt.month
     forecasted_services['sem_de_annee'] = forecasted_services['date'].dt.week
     forecasted_services['jour_annee'] = forecasted_services.apply(lambda x:jour_annee(x['date']), axis=1)
-
     forecasted_services['temp_min'] = forecasted_services['temp'] - 1
     forecasted_services['temp_max'] = forecasted_services['temp'] + 1
     forecasted_services['clouds_all'] = 0
     forecasted_services['moyen_7_services'] = 0
     forecasted_services['moyen_31_services'] = 0
     forecasted_services['moyenne_3der_j&service'] = 0
+    forecasted_services['vacances_paris'] = 0
     forecasted_services['condition'] = forecasted_services['condition'].str.lower()
     table = pd.get_dummies(forecasted_services['condition'])
     forecasted_services = pd.merge(forecasted_services, table, left_index=True, right_index=True).drop(columns='condition')
     forecasted_services['jour']= forecasted_services['date'].dt.strftime('%A')
-    #for i in range(len(forecasted_services)):
-        #if forecasted_services['clouds'][i]==1:
-            #forecasted_services['clouds_all'][i] = 50
-        #if forecasted_services['rain'][i]==1:
-            #forecasted_services['rain'][i] = 50
+    for i in range(len(forecasted_services)):
+        if forecasted_services['clouds'][i]==1:
+            forecasted_services['clouds_all'][i] = 50
+        if forecasted_services['rain'][i]==1:
+            forecasted_services['rain'][i] = 80
+        #if forecasted_services['thunderstorm']:
+            #if forecasted_services['thunderstorm'][i]==1:
+                #forecasted_services['thunderstorm'][i] = 80
+    exo_data['date']=pd.to_datetime(exo_data['date'])
+    forecasted_services = forecasted_services.merge(exo_data, how='left', left_on=['date','service'], right_on=['date','service'])
+    forecasted_services['jour'] = forecasted_services['jour'].map({'Monday':'Lundi','Tuesday':'Mardi', 'Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'})
     forecasted_services.to_csv('../raw_data/forecasted_services.csv')
 
 def PSG_Matches():
