@@ -336,14 +336,14 @@ if __name__ == "__main__":
         train_d2 = Trainer(X_d2, y_d2, resto_name)
         train_d2.run(model=model_test_D2)
         train_d2.evaluate(X_d2, y_d2)
-        train_d2.save_model_locally('../raw_data/model_d2_CO.joblib')
+        train_d2.save_model_locally('../joblibs/model_d2_CO.joblib')
 
     if test_D16 == True:
         resto_name = 'D16'
         train_d16 = Trainer(X_d16, y_d16, resto_name)
         train_d16.run(model=model_test_D16)
         train_d16.evaluate(X_d16, y_d16)
-        train_d16.save_model_locally('../raw_data/model_d16_CO.joblib')
+        train_d16.save_model_locally('../joblibs/model_d16_CO.joblib')
 
     ###TO DO###
 
