@@ -34,8 +34,8 @@ data_path = os.path.relpath(
 request_data_d2 = pd.read_csv(os.path.join(data_path, 'preproc_data_d2.csv'))
 request_data_d16 = pd.read_csv(os.path.join(data_path, 'preproc_data_d16.csv'))
 
-request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
-request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
+#request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
+#request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
 
 ####TRANSFORM RAW DATA###
 # -> already done mannualy
