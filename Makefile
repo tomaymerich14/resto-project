@@ -68,17 +68,24 @@ run_api:
 
 # for all machines
 build_image:
-	docker build -t ${GCR_MULTI_REGION}/$[GCP_PROJECT_ID]/${DOCKER_IMAGE_NAME} .
+	docker build -t ${GCR_MULTI_REGION}/${GCP_PROJECT_ID}/${DOCKER_IMAGE_NAME} .
+
+run_image:
+	docker run -e PORT=8000 -p 8080:8000 ${GCR_MULTI_REGION}/${GCP_PROJECT_ID}/${DOCKER_IMAGE_NAME}
 
 # for apple silicon m1
+build_m1_local:
+	docker build -t ${DOCKER_IMAGE_NAME} .
+
+run_m1_image:
+	docker run -e PORT=8000 -p 8080:8000 ${DOCKER_IMAGE_NAME}
+
 build_m1_image:
 	docker buildx build --platform linux/amd64 -t ${GCR_MULTI_REGION}/${GCP_PROJECT_ID}/${DOCKER_IMAGE_NAME} --load .
 
-run_image:
-	docker run -e PORT=8000 -p 8080:8000 ${GCR_MULTI_REGION}/$[GCP_PROJECT_ID]/${DOCKER_IMAGE_NAME}
-
+# for all computers
 push_image:
-	docker push ${GCR_MULTI_REGION}/$[GCP_PROJECT_ID]/${DOCKER_IMAGE_NAME}
+	docker push ${GCR_MULTI_REGION}/${GCP_PROJECT_ID}/${DOCKER_IMAGE_NAME}
 
 deploy_image:
-	gcloud run deploy --image ${GCR_MULTI_REGION}/$[GCP_PROJECT_ID]/${DOCKER_IMAGE_NAME} --platform managed --region ${GCR_REGION}
+	gcloud run deploy --image ${GCR_MULTI_REGION}/${GCP_PROJECT_ID}/${DOCKER_IMAGE_NAME} --platform managed --region ${GCR_REGION} --project ${GCP_PROJECT_ID}
