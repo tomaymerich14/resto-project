@@ -11,8 +11,6 @@ scikit-learn
 
 # models
 xgboost
-#lightgbm
-#catboost
 
 # tests/linter
 black
@@ -36,4 +34,4 @@ openpyxl
 
 #
 uvicorn
-FastAPI
+fastapi
