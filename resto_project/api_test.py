@@ -17,17 +17,18 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+
 # http://127.0.0.1:8000/predict/
 
 ###INSERT REQUEST###
-pipeline_d2 = joblib.load('../raw_data/model_d2.joblib')
-pipeline_d16 = joblib.load('../raw_data/model_d16.joblib')
+pipeline_d2 = joblib.load('../joblibs/model_d2.joblib')
+pipeline_d16 = joblib.load('../joblibs/model_d16.joblib')
 ###GET RAW DATA###
-request_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
-request_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
+request_data_d2 = pd.read_csv('../raw_data/forecasted_services_d2.csv')
+request_data_d16 = pd.read_csv('../raw_data/forecasted_services_d16.csv')
 
-request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
-request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
+#request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
+#request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
 
 ####TRANSFORM RAW DATA###
 # -> already done mannualy
@@ -60,8 +61,8 @@ def create_fare():
 
 
     # make prediction
-    results_d2 = pipeline_d2.predict(request_data_d2.iloc[0:14])
-    results_d16 = pipeline_d16.predict(request_data_d16.iloc[0:14])
+    results_d2 = pipeline_d2.predict(request_data_d2)
+    results_d16 = pipeline_d16.predict(request_data_d16)
 
     # convert response from numpy to python type
     pred_d2 = results_d2.tolist()

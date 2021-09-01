@@ -122,22 +122,59 @@ def process_api_forecast():
     forecasted_services['jour_annee'] = forecasted_services.apply(lambda x:jour_annee(x['date']), axis=1)
     forecasted_services['temp_min'] = forecasted_services['temp'] - 1
     forecasted_services['temp_max'] = forecasted_services['temp'] + 1
-    forecasted_services['clouds_all'] = 0
+
+    summed_conditions = ['clear', 'clouds', 'rain', 'mist', 'drizzle', 'fog', 'snow', 'thunderstorm', 'haze','drizzle_and_rain']
+
+
+
     forecasted_services['condition'] = forecasted_services['condition'].str.lower()
     table = pd.get_dummies(forecasted_services['condition'])
     forecasted_services = pd.merge(forecasted_services, table, left_index=True, right_index=True).drop(columns='condition')
+    for i in summed_conditions:
+        if i in forecasted_services:
+            pass
+        else:
+            forecasted_services[i] = 0
     forecasted_services['jour']= forecasted_services['date'].dt.strftime('%A')
 
     list_of_weathers = ['clear', 'clouds', 'rain', 'mist', 'drizzle', 'fog', 'snow', 'thunderstorm', 'haze']
-
+    forecasted_services['clouds_all'] = 0
     for i in range(len(forecasted_services)):
         if forecasted_services['clouds'][i]==1:
             forecasted_services['clouds_all'][i] = 50
 
+
     forecasted_services_d16 = forecasted_services.copy()
     forecasted_services_d2 = forecasted_services.copy()
+    ########################WEATHER####################################
 
+    forecasted_services_d16['clear'] = forecasted_services_d16['clear'].replace(1, 'sky is clear')
 
+    forecasted_services_d16['clouds'] = forecasted_services_d16['clouds'].replace(1, 'overcast clouds')
+
+    forecasted_services_d16['drizzle'] = forecasted_services_d16['drizzle'].replace(1, 'light intensity drizzle')
+
+    forecasted_services_d16['drizzle_and_rain'] = forecasted_services_d16['drizzle_and_rain'].replace(1, 'light intensity drizzle rain')
+
+    forecasted_services_d16['fog'] = forecasted_services_d16['fog'].replace(1, 'fog')
+
+    forecasted_services_d16['mist'] = forecasted_services_d16['mist'].replace(1, 'mist')
+
+    forecasted_services_d16['thunderstorm'] = forecasted_services_d16['thunderstorm'].replace(1, 'proximity thunderstorm')
+
+    forecasted_services_d2['clear'] = forecasted_services_d2['clear'].replace(1, 'sky is clear')
+
+    forecasted_services_d2['clouds'] = forecasted_services_d2['clouds'].replace(1, 'overcast clouds')
+
+    forecasted_services_d2['drizzle'] = forecasted_services_d2['drizzle'].replace(1, 'light intensity drizzle')
+
+    forecasted_services_d2['drizzle_and_rain'] = forecasted_services_d2['drizzle_and_rain'].replace(1, 'light intensity drizzle rain')
+
+    forecasted_services_d2['fog'] = forecasted_services_d2['fog'].replace(1, 'fog')
+
+    forecasted_services_d2['mist'] = forecasted_services_d2['mist'].replace(1, 'mist')
+
+    forecasted_services_d2['thunderstorm'] = forecasted_services_d2['thunderstorm'].replace(1, 'proximity thunderstorm')
 
     ########################D2#########################################
     forecasted_services_d2['moyen_7_services'] = df_d2_sept['moyen_7_services']
@@ -157,12 +194,14 @@ def process_api_forecast():
     forecasted_services_d16['moyen_7_services'] = df_d16_sept['moyen_7_services']
     forecasted_services_d16['moyen_31_services'] = df_d16_sept['moyen_31_services']
     forecasted_services_d16['moyenne_3der_j&service'] = df_d16_sept['moyenne_3der_j&service']
+    forecasted_services_d16['vacances_paris'] = 0
 
     exo_data['date']=pd.to_datetime(exo_data['date'])
     forecasted_services_d16 = forecasted_services_d16.merge(exo_data, how='left', left_on=['date','service'], right_on=['date','service'])
 
     forecasted_services_d16['jour'] = forecasted_services_d16['jour'].map({'Monday':'Lundi','Tuesday':'Mardi', 'Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'})
     forecasted_services_d16.to_csv('../raw_data/forecasted_services_d16.csv')
+
 
 
 def PSG_Matches():
