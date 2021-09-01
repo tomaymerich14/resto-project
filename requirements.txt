@@ -9,6 +9,9 @@ numpy
 pandas
 scikit-learn
 
+# models
+xgboost
+
 # tests/linter
 black
 coverage
@@ -28,3 +31,8 @@ joblib
 memoized-property
 termcolor
 openpyxl
+
+#
+uvicorn
+fastapi
+file
