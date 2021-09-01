@@ -1,7 +1,9 @@
 from datetime import datetime
 import pandas as pd
 import joblib
-from fastapi import FastAPI
+#from Resto_Project_D2.predict import download_model_D2
+#from Resto_Project_D2.predict import download_model_D16
+from fastapi import FastAPI, File
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -22,11 +24,9 @@ model_path = os.path.relpath(os.path.join(
     os.path.dirname(__file__),
     "..",
     "joblibs"))
-#pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
-#pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
+pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
+pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
 
-pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../raw_data/model_d2_CO.joblib'))
-pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../raw_data/model_d16_CO.joblib'))
 ###GET RAW DATA###
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
@@ -44,20 +44,23 @@ def index():
 
 
 @app.post("/uploadfile")
-async def create_upload_file(file: bytes = File(...)):
+async def create_upload_file(resto_name,file: bytes = File(...)):
 
     # print("\nreceived file:")
     # print(type(file))
     # print(file)
 
-    image_path = "image_api.png"
+    if resto_name == 'd2':
+        file_path = "forecasted_services_d2.csv"
+    if resto_name == 'd16':
+        file_path = "forecasted_services_d16.csv"
+
 
     # write file to disk
-    with open(image_path, "wb") as f:
+    with open(file_path, "wb") as f:
         f.write(file)
 
     # model -> pred
-
     return dict(pred=True)
 
 
@@ -69,7 +72,6 @@ def create_fare():
     results_d2 = pipeline_d2.predict(request_data_d2)
     #D16
     results_d16 = pipeline_d16.predict(request_data_d16)
-
 
     # convert response from numpy to python type
     pred_d2 = results_d2.tolist()
