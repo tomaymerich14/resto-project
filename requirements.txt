@@ -8,13 +8,11 @@ wheel>=0.29
 numpy
 pandas
 scikit-learn
-xgboost
-lightgbm
 
 # models
 xgboost
-lightgbm
-catboost
+#lightgbm
+#catboost
 
 # tests/linter
 black
@@ -35,3 +33,7 @@ joblib
 memoized-property
 termcolor
 openpyxl
+
+#
+uvicorn
+FastAPI
