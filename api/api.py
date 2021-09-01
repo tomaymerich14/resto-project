@@ -24,9 +24,11 @@ model_path = os.path.relpath(os.path.join(
     os.path.dirname(__file__),
     "..",
     "joblibs"))
-pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
-pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
+#pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
+#pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
 
+pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../raw_data/model_d2_CO.joblib'))
+pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../raw_data/model_d16_CO.joblib'))
 ###GET RAW DATA###
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
@@ -52,12 +54,13 @@ def create_fare():
 
     # make prediction
     #J1
-    results_d2 = pipeline_d2.predict(request_data_d2.iloc[0:14])
+    #results_d2 = pipeline_d2.predict(request_data_d2.iloc[0:14])
+    results_d2 = pipeline_couvert_d2.predict(request_data_d2.iloc[0:14])
     #J2
     #J3
     #J4
-    results_d16 = pipeline_d16.predict(request_data_d16.iloc[0:14])
-
+    #results_d16 = pipeline_d16.predict(request_data_d16.iloc[0:14])
+    results_d16 = pipeline_couvert_d16.predict(request_data_d16.iloc[0:14])
     # convert response from numpy to python type
     pred_d2 = results_d2.tolist()
     pred_d16 = results_d16.tolist()
