@@ -17,7 +17,6 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-
 # http://127.0.0.1:8000/predict/
 
 ###INSERT REQUEST###
