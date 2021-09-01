@@ -5,7 +5,7 @@ import joblib
 #from Resto_Project_D2.predict import download_model_D16
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-#import os
+import os
 
 app = FastAPI()
 
@@ -19,12 +19,20 @@ app.add_middleware(
 
 # http://127.0.0.1:8000/predict/
 
-###INSERT REQUEST###
-pipeline_d2 = joblib.load('../raw_data/model_d2.joblib')
-pipeline_d16 = joblib.load('../raw_data/model_d16.joblib')
+###GET JOBLIB###
+model_path = os.path.relpath(os.path.join(
+    os.path.dirname(__file__),
+    "..",
+    "joblibs"))
+pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
+pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
+
 ###GET RAW DATA###
-request_data_d2 = pd.read_csv('../raw_data/preproc_data_d2.csv')
-request_data_d16 = pd.read_csv('../raw_data/preproc_data_d16.csv')
+data_path = os.path.relpath(
+    os.path.join(os.path.dirname(__file__), "..", "raw_data"))
+
+request_data_d2 = pd.read_csv(os.path.join(data_path, 'preproc_data_d2.csv'))
+request_data_d16 = pd.read_csv(os.path.join(data_path, 'preproc_data_d16.csv'))
 
 request_data_d2 = request_data_d2.drop(columns=["CA_TTC"])
 request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
@@ -32,35 +40,22 @@ request_data_d16 = request_data_d16.drop(columns=["CA_TTC"])
 ####TRANSFORM RAW DATA###
 # -> already done mannualy
 
-###GET PREDICT
-
+###GET PREDICT RESULTS###
 @app.get("/")
 def index():
     return {"Welcome to": "Resto Project"}
 
 
-@app.get("/predict/")
+@app.get("/predict")
 def create_fare():
-    #def create_fare(date, service, match_edf, roland_garros, fashion_week,
-    #       match_happening, match_happening_cl, temp, feels_like,
-    #       temp_min, temp_max, wind_speed, clouds_all, vacances_paris,
-    #       clear, clouds, drizzle, drizzle_and_rain, fog, mist, rain,
-    #       thunderstorm):
-
-    # date = "2013-07-06"
-    # service = "midi"
-    #resto_name = 'D2'
-
-
-
-    # ⚠️ TODO: get model from GCP
-
-    #pipeline = get_model_from_gcp()
-    #pipeline = download_model()
 
 
     # make prediction
+    #J1
     results_d2 = pipeline_d2.predict(request_data_d2.iloc[0:14])
+    #J2
+    #J3
+    #J4
     results_d16 = pipeline_d16.predict(request_data_d16.iloc[0:14])
 
     # convert response from numpy to python type
