@@ -44,17 +44,30 @@ def index():
 
 
 @app.post("/uploadfile")
-async def create_upload_file(resto_name,file: bytes = File(...)):
+async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...)):
 
     # print("\nreceived file:")
     # print(type(file))
     # print(file)
 
-    if resto_name == 'd2':
-        file_path = "forecasted_services_d2.csv"
-    if resto_name == 'd16':
-        file_path = "forecasted_services_d16.csv"
-
+    if resto_name == 'D2':
+        if file_type == 'csv':
+            predict = None
+            file_path = "forecasted_services_d2.csv"
+        if file_type == 'joblib':
+            if predict == 'CA':
+                file_path = "model_d2.joblib"
+            if predict == 'CO':
+                file_path = "model_d2_CO.joblib"
+    if resto_name == 'D16':
+        if file_type == 'csv':
+            predict = None
+            file_path = "forecasted_services_d16.csv"
+        if file_type == 'joblib':
+            if predict == 'CA':
+                file_path = "model_d16.joblib"
+            if predict == 'CO':
+                file_path = "model_d16_CO.joblib"
 
     # write file to disk
     with open(file_path, "wb") as f:
