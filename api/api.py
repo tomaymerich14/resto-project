@@ -24,12 +24,10 @@ model_path = os.path.relpath(os.path.join(
     os.path.dirname(__file__),
     "..",
     "joblibs"))
-pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
-pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
-
-
-pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../joblibs/model_d2_CO.joblib'))
-pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../joblibs/model_d16_CO.joblib'))
+pipeline_d2_CA = joblib.load(os.path.join(model_path, 'model_d2_CA.joblib'))
+pipeline_d16_CA = joblib.load(os.path.join(model_path, 'model_d16_CA.joblib'))
+pipeline_d2_CO = joblib.load(os.path.join(model_path, 'model_d2_CO.joblib'))
+pipeline_d16_CO = joblib.load(os.path.join(model_path, 'model_d16_CO.joblib'))
 
 ###GET RAW DATA###
 data_path = os.path.relpath(
@@ -50,9 +48,9 @@ def index():
 @app.post("/uploadfile")
 async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...)):
 
-    # print("\nreceived file:")
-    # print(type(file))
-    # print(file)
+    # resto_name = 'D2' 'D16'
+    # file_type = 'csv' 'joblib'
+    # predict = 'CA' 'CO' , 'None'
 
     if resto_name == 'D2':
         if file_type == 'csv':
@@ -60,7 +58,7 @@ async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...
             file_path = "forecasted_services_d2.csv"
         if file_type == 'joblib':
             if predict == 'CA':
-                file_path = "model_d2.joblib"
+                file_path = "model_d2_CA.joblib"
             if predict == 'CO':
                 file_path = "model_d2_CO.joblib"
     if resto_name == 'D16':
@@ -69,7 +67,7 @@ async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...
             file_path = "forecasted_services_d16.csv"
         if file_type == 'joblib':
             if predict == 'CA':
-                file_path = "model_d16.joblib"
+                file_path = "model_d16_CA.joblib"
             if predict == 'CO':
                 file_path = "model_d16_CO.joblib"
 
@@ -86,12 +84,21 @@ def create_fare():
 
     # make prediction
     #D2
-    results_d2 = pipeline_d2.predict(request_data_d2)
+    results_d2_CA = pipeline_d2_CA.predict(request_data_d2)
+    results_d2_CO = pipeline_d2_CO.predict(request_data_d2)
     #D16
-    results_d16 = pipeline_d16.predict(request_data_d16)
+    results_d16_CA = pipeline_d16_CA.predict(request_data_d16)
+    results_d16_CO = pipeline_d16_CO.predict(request_data_d16)
 
     # convert response from numpy to python type
-    pred_d2 = results_d2.tolist()
-    pred_d16 = results_d16.tolist()
+    #D2
+    pred_d2_CA = results_d2_CA.tolist()
+    pred_d2_CO = results_d2_CO.tolist()
+    #D16
+    pred_d16_CA = results_d16_CA.tolist()
+    pred_d16_CO = results_d16_CO.tolist()
 
-    return dict(prediction_D2_CA=pred_d2, prediction_D16_CA=pred_d16)
+    return dict(prediction_D2_CA=pred_d2_CA,
+                prediction_D16_CA=pred_d16_CA,
+                prediction_D2_CO=pred_d2_CO,
+                prediction_D16_CO=pred_d16_CO)
