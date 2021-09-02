@@ -13,7 +13,7 @@ from termcolor import colored
 #SKLEARN
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
-from sklearn.pipeline import make_pipeline, Pipeline
+from sklearn.pipeline import make_pipeline
 from sklearn.compose import make_column_transformer
 from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
@@ -103,8 +103,7 @@ class Trainer():
             remainder="drop")
 
         #set pipe
-        self.pipeline = Pipeline(steps=[('preproc',preproc),
-                                 ('model', model)])
+        self.pipeline = make_pipeline(preproc, model)
 
     def run(self, model):
         self.set_pipeline(model)
@@ -216,14 +215,14 @@ if __name__ == "__main__":
         train_d2 = Trainer(X_d2, y_d2, resto_name)
         train_d2.run(model=model_test_D2)
         train_d2.evaluate(X_d2, y_d2)
-        train_d2.save_model_locally('../raw_data/model_d2.joblib')
+        train_d2.save_model_locally('../joblibs/model_d2_CA.joblib')
 
     if test_D16 == True:
         resto_name = 'D16'
         train_d16 = Trainer(X_d16, y_d16, resto_name)
         train_d16.run(model=model_test_D16)
         train_d16.evaluate(X_d16, y_d16)
-        train_d16.save_model_locally('../raw_data/model_d16.joblib')
+        train_d16.save_model_locally('../joblibs/model_d16_CA.joblib')
 
 
 
