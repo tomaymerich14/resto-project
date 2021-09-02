@@ -27,8 +27,8 @@ model_path = os.path.relpath(os.path.join(
 #pipeline_d2 = joblib.load(os.path.join(model_path, 'model_d2.joblib'))
 #pipeline_d16 = joblib.load(os.path.join(model_path, 'model_d16.joblib'))
 
-pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../raw_data/model_d2_CO.joblib'))
-pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../raw_data/model_d16_CO.joblib'))
+pipeline_couvert_d2 = joblib.load(os.path.join(model_path, '../joblibs/model_d2_CO.joblib'))
+pipeline_couvert_d16 = joblib.load(os.path.join(model_path, '../joblibs/model_d16_CO.joblib'))
 ###GET RAW DATA###
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
