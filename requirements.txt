@@ -35,4 +35,4 @@ openpyxl
 # API2
 uvicorn
 fastapi
-file
+python-multipart
