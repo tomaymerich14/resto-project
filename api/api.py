@@ -56,8 +56,10 @@ async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...
 
     if resto_name == 'D2':
         if file_type == 'csv':
-            predict = None
-            file_path = "forecasted_services_d2.csv"
+            if predict == 'CA':
+                file_path = "forecasted_services_d2_CA.csv"
+            if predict == 'CO':
+                file_path = "forecasted_services_d2_CO.csv"
         if file_type == 'joblib':
             if predict == 'CA':
                 file_path = "model_d2_CA.joblib"
@@ -65,8 +67,10 @@ async def create_upload_file(resto_name,file_type,predict,file: bytes = File(...
                 file_path = "model_d2_CO.joblib"
     if resto_name == 'D16':
         if file_type == 'csv':
-            predict = None
-            file_path = "forecasted_services_d16.csv"
+            if predict == 'CA':
+                file_path = "forecasted_services_d16_CA.csv"
+            if predict == 'CO':
+                file_path = "forecasted_services_d16_CO.csv"
         if file_type == 'joblib':
             if predict == 'CA':
                 file_path = "model_d16_CA.joblib"
