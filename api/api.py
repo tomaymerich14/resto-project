@@ -33,9 +33,11 @@ pipeline_d16_CO = joblib.load(os.path.join(model_path, 'model_d16_CO.joblib'))
 data_path = os.path.relpath(
     os.path.join(os.path.dirname(__file__), "..", "raw_data"))
 
-request_data_d2 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d2.csv'))
-request_data_d16 = pd.read_csv(os.path.join(data_path, 'forecasted_services_d16.csv'))
+request_data_d2_CA = pd.read_csv(os.path.join(data_path, 'forecasted_services_d2_CA.csv'))
+request_data_d16_CA = pd.read_csv(os.path.join(data_path, 'forecasted_services_d16_CA.csv'))
 
+request_data_d2_CO = pd.read_csv(os.path.join(data_path, 'forecasted_services_d2_CO.csv'))
+request_data_d16_CO = pd.read_csv(os.path.join(data_path, 'forecasted_services_d16_CO.csv'))
 ####TRANSFORM RAW DATA###
 # -> already done mannualy
 
@@ -84,11 +86,11 @@ def create_fare():
 
     # make prediction
     #D2
-    results_d2_CA = pipeline_d2_CA.predict(request_data_d2)
-    results_d2_CO = pipeline_d2_CO.predict(request_data_d2)
+    results_d2_CA = pipeline_d2_CA.predict(request_data_d2_CA)
+    results_d2_CO = pipeline_d2_CO.predict(request_data_d2_CO)
     #D16
-    results_d16_CA = pipeline_d16_CA.predict(request_data_d16)
-    results_d16_CO = pipeline_d16_CO.predict(request_data_d16)
+    results_d16_CA = pipeline_d16_CA.predict(request_data_d16_CA)
+    results_d16_CO = pipeline_d16_CO.predict(request_data_d16_CO)
 
     # convert response from numpy to python type
     #D2
