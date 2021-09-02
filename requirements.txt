@@ -32,9 +32,10 @@ memoized-property
 termcolor
 openpyxl
 
-#
+# API2
 uvicorn
 fastapi
 file
-#
+
+# LOCAL
 python-multipart
