@@ -100,7 +100,7 @@ def process_api_forecast():
             if seven_day_forecast['condition'][i] in x:
                 seven_day_forecast['condition'][i] = x[0]
 
-
+############################# SERVICE CREATION ####################
     lunch = seven_day_forecast[seven_day_forecast['time'].dt.hour==12]
     lunch['service']='midi'
     dinner = seven_day_forecast[seven_day_forecast['time'].dt.hour==18]
@@ -108,7 +108,7 @@ def process_api_forecast():
 
     forecasted_services = pd.concat([lunch, dinner])
     forecasted_services['time'] = forecasted_services['time'].dt.date
-
+############################ CREATE COLUMNS FOR DATE, TIME, WEEK ... ########
     forecasted_services=forecasted_services.set_index('time')
     forecasted_services = forecasted_services.sort_values('time')
     forecasted_services = forecasted_services[['index','temp_c','condition','wind_kph','feelslike_c', 'service']]
@@ -125,7 +125,7 @@ def process_api_forecast():
 
     summed_conditions = ['clear', 'clouds', 'rain', 'mist', 'drizzle', 'fog', 'snow', 'thunderstorm', 'haze','drizzle_and_rain']
 
-
+    ##################### TRANSFORM WEATHER CONDITION INTO ENCODED COLUMNS ####################
 
     forecasted_services['condition'] = forecasted_services['condition'].str.lower()
     table = pd.get_dummies(forecasted_services['condition'])
@@ -137,13 +137,18 @@ def process_api_forecast():
             forecasted_services[i] = 0
     forecasted_services['jour']= forecasted_services['date'].dt.strftime('%A')
 
-    list_of_weathers = ['clear', 'clouds', 'rain', 'mist', 'drizzle', 'fog', 'snow', 'thunderstorm', 'haze']
+
+    ################### CLOUDS ALL CREATION ###########################
     forecasted_services['clouds_all'] = 0
     for i in range(len(forecasted_services)):
         if forecasted_services['clouds'][i]==1:
             forecasted_services['clouds_all'][i] = 50
-
-
+        if forecasted_services['rain'][i]==1:
+            forecasted_services['clouds_all'][i] = 50
+        if forecasted_services['snow'][i]==1:
+            forecasted_services['clouds_all'][i] = 50
+        if forecasted_services['thunderstorm'][i]==1:
+            forecasted_services['clouds_all'][i] = 50
     forecasted_services_d16 = forecasted_services.copy()
     forecasted_services_d2 = forecasted_services.copy()
     ########################WEATHER####################################
