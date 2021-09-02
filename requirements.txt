@@ -36,6 +36,3 @@ openpyxl
 uvicorn
 fastapi
 file
-
-# LOCAL
-python-multipart
